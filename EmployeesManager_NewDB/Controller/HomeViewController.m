@@ -17,6 +17,10 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     
+    // Lấy địa chỉ file chứa database
+    NSArray<NSString *> *dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentationDirectory, NSUserDomainMask, YES);
+    NSLog(@"%@", dirPaths);
+    
     [super viewWillAppear:animated];
     
     [self.navigationController setNavigationBarHidden:YES];

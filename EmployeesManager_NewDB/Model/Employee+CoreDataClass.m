@@ -12,16 +12,39 @@
 @implementation Employee
 
 //--------------------
+//- (void)awakeFromInsert {
+//
+//    [super awakeFromInsert];
+//
+//    self.employeeID = [NSString stringWithFormat:@"emp00%ld",[self __getMaxID]];
+//}
+//
+//- (NSInteger)__getMaxID {
+//
+//    return [[ContentManager shareManager] getAllEmployee].count;
+//}
 - (void)awakeFromInsert {
-    
     [super awakeFromInsert];
     
-    self.employeeID = [NSString stringWithFormat:@"emp00%ld",[self __getMaxID]];
+    self.employeeID = [NSString stringWithFormat:@"emp00%ld",[self __getMaxID]+1];
 }
 
-- (NSInteger)__getMaxID {
+- (NSString *)__getMaxID {
+    if(!self.managedObjectContext)return NSNotFound;
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:self.entity.name];
     
-    return [[ContentManager shareManager] getAllEmployee].count;
+    fetchRequest.fetchLimit = 1;
+    fetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"employeeID" ascending:NO]];
+    
+    NSError *error = nil;
+    
+    Employee *employee = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error].firstObject;
+    
+    return employee.employeeName;
+}
+
+- (NSInteger)lastInsertID {
+    return [self __getMaxID];
 }
 //--------------------
 
