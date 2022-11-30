@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "DepartmentViewController.h"
+#import "HomeViewController.h"
 
 @interface AppDelegate ()
 
@@ -20,9 +21,9 @@
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen]bounds]];
     
-    DepartmentViewController *departmentView = [[DepartmentViewController alloc] init];
+    HomeViewController *homeViewController = [[HomeViewController alloc] init];
     
-    UINavigationController *navi = [[UINavigationController alloc] initWithRootViewController:departmentView];
+    UINavigationController *navi = [[UINavigationController alloc] initWithRootViewController:homeViewController];
     
     [self.window setRootViewController:navi];
     

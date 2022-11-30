@@ -10,6 +10,14 @@
 		57792DFB29347A9900AFB71E /* EmployeeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57792DF929347A9900AFB71E /* EmployeeViewController.m */; };
 		57792DFC29347A9900AFB71E /* EmployeeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 57792DFA29347A9900AFB71E /* EmployeeViewController.xib */; };
 		57792E4D2936E2DF00AFB71E /* data.json in Resources */ = {isa = PBXBuildFile; fileRef = 57792E4C2936E2DF00AFB71E /* data.json */; };
+		57792E5029371C4800AFB71E /* HomeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 57792E4F29371C4800AFB71E /* HomeView.m */; };
+		57792E5229371C9000AFB71E /* HomeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 57792E5129371C9000AFB71E /* HomeView.xib */; };
+		57792E5629371F0C00AFB71E /* manager.png in Resources */ = {isa = PBXBuildFile; fileRef = 57792E5429371F0C00AFB71E /* manager.png */; };
+		57792E5A29372C4000AFB71E /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57792E5829372C4000AFB71E /* HomeViewController.m */; };
+		57792E5B29372C4000AFB71E /* HomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 57792E5929372C4000AFB71E /* HomeViewController.xib */; };
+		57792E6029372ECE00AFB71E /* department.png in Resources */ = {isa = PBXBuildFile; fileRef = 57792E5E29372ECE00AFB71E /* department.png */; };
+		57792E6129372ECE00AFB71E /* home.png in Resources */ = {isa = PBXBuildFile; fileRef = 57792E5F29372ECE00AFB71E /* home.png */; };
+		57792E63293737ED00AFB71E /* company.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 57792E62293737EC00AFB71E /* company.jpg */; };
 		57D64D34293075CF0003F280 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 57D64D33293075CF0003F280 /* AppDelegate.m */; };
 		57D64D3D293075CF0003F280 /* EmployeesManager_NewDB.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 57D64D3B293075CF0003F280 /* EmployeesManager_NewDB.xcdatamodeld */; };
 		57D64D3F293075D20003F280 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 57D64D3E293075D20003F280 /* Assets.xcassets */; };
@@ -43,6 +51,16 @@
 		57792DF929347A9900AFB71E /* EmployeeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EmployeeViewController.m; sourceTree = "<group>"; };
 		57792DFA29347A9900AFB71E /* EmployeeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EmployeeViewController.xib; sourceTree = "<group>"; };
 		57792E4C2936E2DF00AFB71E /* data.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = data.json; sourceTree = "<group>"; };
+		57792E4E29371C4800AFB71E /* HomeView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeView.h; sourceTree = "<group>"; };
+		57792E4F29371C4800AFB71E /* HomeView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeView.m; sourceTree = "<group>"; };
+		57792E5129371C9000AFB71E /* HomeView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeView.xib; sourceTree = "<group>"; };
+		57792E5429371F0C00AFB71E /* manager.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = manager.png; sourceTree = "<group>"; };
+		57792E5729372C4000AFB71E /* HomeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
+		57792E5829372C4000AFB71E /* HomeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
+		57792E5929372C4000AFB71E /* HomeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeViewController.xib; sourceTree = "<group>"; };
+		57792E5E29372ECE00AFB71E /* department.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = department.png; sourceTree = "<group>"; };
+		57792E5F29372ECE00AFB71E /* home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home.png; sourceTree = "<group>"; };
+		57792E62293737EC00AFB71E /* company.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = company.jpg; sourceTree = "<group>"; };
 		57D64D2F293075CF0003F280 /* EmployeesManager_NewDB.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EmployeesManager_NewDB.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		57D64D32293075CF0003F280 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		57D64D33293075CF0003F280 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -137,6 +155,10 @@
 				57D64D8029309BBB0003F280 /* back.png */,
 				57D64D7D29309BBA0003F280 /* edit-.png */,
 				57D64D7C29309BBA0003F280 /* remove.png */,
+				57792E5429371F0C00AFB71E /* manager.png */,
+				57792E5E29372ECE00AFB71E /* department.png */,
+				57792E5F29372ECE00AFB71E /* home.png */,
+				57792E62293737EC00AFB71E /* company.jpg */,
 				57792E4B2936E2A900AFB71E /* Data */,
 				57D64D6E293097B40003F280 /* View */,
 				57D64D5E2930816A0003F280 /* Controller */,
@@ -173,6 +195,9 @@
 		57D64D5E2930816A0003F280 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				57792E5729372C4000AFB71E /* HomeViewController.h */,
+				57792E5829372C4000AFB71E /* HomeViewController.m */,
+				57792E5929372C4000AFB71E /* HomeViewController.xib */,
 				57D64D5F293081940003F280 /* DepartmentViewController.h */,
 				57D64D60293081940003F280 /* DepartmentViewController.m */,
 				57D64D61293081940003F280 /* DepartmentViewController.xib */,
@@ -203,6 +228,9 @@
 				57D64D7729309AD50003F280 /* HeaderView.h */,
 				57D64D7829309AD50003F280 /* HeaderView.m */,
 				57D64D7A29309AF20003F280 /* HeaderView.xib */,
+				57792E4E29371C4800AFB71E /* HomeView.h */,
+				57792E4F29371C4800AFB71E /* HomeView.m */,
+				57792E5129371C9000AFB71E /* HomeView.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -266,17 +294,23 @@
 			files = (
 				57D64D8A2930A2190003F280 /* AddViewController.xib in Resources */,
 				57D64D8429309BBB0003F280 /* add.png in Resources */,
+				57792E6129372ECE00AFB71E /* home.png in Resources */,
 				57792DFC29347A9900AFB71E /* EmployeeViewController.xib in Resources */,
 				57792E4D2936E2DF00AFB71E /* data.json in Resources */,
 				57D64D8229309BBB0003F280 /* edit-.png in Resources */,
 				57D64D63293081940003F280 /* DepartmentViewController.xib in Resources */,
 				57D64D8329309BBB0003F280 /* apply.png in Resources */,
+				57792E5229371C9000AFB71E /* HomeView.xib in Resources */,
 				57D64D7B29309AF20003F280 /* HeaderView.xib in Resources */,
+				57792E5629371F0C00AFB71E /* manager.png in Resources */,
 				57D64D76293097EE0003F280 /* TableViewCell.xib in Resources */,
 				57D64D8529309BBB0003F280 /* back.png in Resources */,
+				57792E5B29372C4000AFB71E /* HomeViewController.xib in Resources */,
 				57D64D8129309BBB0003F280 /* remove.png in Resources */,
 				57D64D42293075D20003F280 /* LaunchScreen.storyboard in Resources */,
+				57792E6029372ECE00AFB71E /* department.png in Resources */,
 				57D64D3F293075D20003F280 /* Assets.xcassets in Resources */,
+				57792E63293737ED00AFB71E /* company.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -295,7 +329,9 @@
 				57D64D45293075D20003F280 /* main.m in Sources */,
 				57D64D62293081940003F280 /* DepartmentViewController.m in Sources */,
 				57D64D662930832A0003F280 /* ContentManager.m in Sources */,
+				57792E5A29372C4000AFB71E /* HomeViewController.m in Sources */,
 				57792DFB29347A9900AFB71E /* EmployeeViewController.m in Sources */,
+				57792E5029371C4800AFB71E /* HomeView.m in Sources */,
 				57D64D5D293080C20003F280 /* DepartmentEmployee+CoreDataProperties.m in Sources */,
 				57D64D3D293075CF0003F280 /* EmployeesManager_NewDB.xcdatamodeld in Sources */,
 				57D64D892930A2190003F280 /* AddViewController.m in Sources */,

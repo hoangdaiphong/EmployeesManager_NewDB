@@ -16,6 +16,7 @@
 @synthesize containView;
 @synthesize tblEmployee;
 @synthesize inputDepartment;
+//@synthesize allEmployee;
 
 - (void)viewDidLoad {
     
@@ -30,7 +31,7 @@
     
     HeaderView *header = [[HeaderView alloc] init];
     
-    [header setHeaderWithTitle:inputDepartment.departmentName hideBack:NO hideAdd:NO inController:self];
+    [header setHeaderWithTitle:inputDepartment.departmentName hideBack:YES hideAdd:NO inController:self];
     
     header.delegate = self;
     
@@ -43,16 +44,30 @@
     tblEmployee.dataSource = self;
     tblEmployee.delegate = self;
     
+    HomeView *homeView = [[HomeView alloc] init];
+    [homeView setHomeView];
+    homeView.delegate = self;
+    [containView addSubview:homeView];
+    
     [self getData];
 }
 
 - (void)getData {
+    
+    [self getAllEmployee];
     
     [self getEmployeeListInDepartment];
     
     [tblEmployee reloadData];
 }
 //---------------
+// Lay toan bo danh sach Employee
+- (void) getAllEmployee {
+    
+    employeeList = [[NSMutableArray alloc] init];
+    
+    [employeeList addObjectsFromArray:[[ContentManager shareManager] getAllEmployee]];
+}
 // Lay danh sach EmployeeDepartment co DepartmentID trung nhau
 - (void)getEmployeeDepartment {
     
@@ -103,6 +118,7 @@
     
     TableViewCell *cell = [self.tblEmployee dequeueReusableCellWithIdentifier:@"Cell"];
     //------------
+    
     [cell setCellWithEmployee:[employeeListInDepartment objectAtIndex:indexPath.row] atIndex:indexPath];
     //------------
     cell.delegate = self;
@@ -156,4 +172,34 @@
         [tblEmployee reloadData];
     }
 }
+
+#pragma HomeView delegate
+- (void)homeViewPushRightActionDepartment {
+    
+    DepartmentViewController *departmentViewController = [[DepartmentViewController alloc] init];
+    
+    NSMutableArray *vcs =  [NSMutableArray arrayWithArray:self.navigationController.viewControllers];
+    
+    [vcs insertObject:departmentViewController atIndex:[vcs count] - 1];
+    
+    [self.navigationController setViewControllers:vcs animated:NO];
+    
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)homeViewPushRightActionHome {
+    
+    HomeViewController *homeViewController = [[HomeViewController alloc] init];
+    
+    NSMutableArray *vcs =  [NSMutableArray arrayWithArray:self.navigationController.viewControllers];
+    
+    [vcs insertObject:homeViewController atIndex:[vcs count] - 1];
+    
+    [self.navigationController setViewControllers:vcs animated:NO];
+    
+    [self.navigationController popViewControllerAnimated:YES];
+    
+}
+
+
 @end

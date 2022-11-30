@@ -13,10 +13,12 @@
 #import "AddViewController.h"
 #import "EmployeeViewController.h"
 #import "DepartmentEmployee+CoreDataClass.h"
+#import "HomeView.h"
+#import "HomeViewController.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface DepartmentViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, HeaderViewDelegate, AddViewControllerDelegate, TableViewCellDelegate> {
+@interface DepartmentViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, HeaderViewDelegate, AddViewControllerDelegate, TableViewCellDelegate, HomeViewDelegate> {
     
     NSMutableArray *departmentList;
     //-----------

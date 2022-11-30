@@ -11,12 +11,15 @@
 #import "HeaderView.h"
 #import "AddViewController.h"
 #import "TableViewCell.h"
+#import "HomeViewController.h"
+#import "HomeView.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface EmployeeViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, HeaderViewDelegate, AddViewControllerDelegate, TableViewCellDelegate> {
+@interface EmployeeViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, HeaderViewDelegate, AddViewControllerDelegate, TableViewCellDelegate, HomeViewDelegate> {
 
     //----------
+    NSMutableArray *employeeList;
     NSMutableArray *employeeListInDepartment;
     NSMutableArray *departmentEmployeeList;
     //----------
@@ -27,6 +30,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 //---------------
 @property (nonatomic, weak) Department *inputDepartment;
+
+//@property (nonatomic, assign) BOOL allEmployee;
 //---------------
 @end
 

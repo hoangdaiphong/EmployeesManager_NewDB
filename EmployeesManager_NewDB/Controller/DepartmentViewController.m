@@ -28,9 +28,8 @@
     [self.navigationController setNavigationBarHidden:YES];
     
     // Lấy địa chỉ file chứa database
-    NSArray<NSString *> *dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentationDirectory, NSUserDomainMask, YES);
-    
-    NSLog(@"%@", dirPaths);
+//    NSArray<NSString *> *dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentationDirectory, NSUserDomainMask, YES);
+//    NSLog(@"%@", dirPaths);
 }
 
 - (void)viewDidLoad {
@@ -45,11 +44,8 @@
     [containView setFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
     
     HeaderView *header = [[HeaderView alloc] init];
-    
     [header setHeaderWithTitle:@"部署" hideBack:YES hideAdd:NO inController:self];
-    
     header.delegate = self;
-    
     [containView addSubview:header];
     
     [tblDepartment setFrame:CGRectMake(0, 100, SCREEN_WIDTH, SCREEN_HEIGHT - 100)];
@@ -58,6 +54,11 @@
     
     tblDepartment.dataSource = self;
     tblDepartment.delegate = self;
+    
+    HomeView *homeView = [[HomeView alloc] init];
+    [homeView setHomeView];
+    homeView.delegate = self;
+    [containView addSubview:homeView];
     
     [self getData];
 }
@@ -202,6 +203,28 @@
     addView.inputDepartment = [departmentList objectAtIndex:index.row];
     
     [self.navigationController pushViewController:addView animated:YES];
+}
+
+#pragma HomeView delegate
+
+- (void)homeViewPushRightActionEmployee {
+    
+    EmployeeViewController *employeeViewController = [[EmployeeViewController alloc] init];
+    
+    [self.navigationController pushViewController:employeeViewController animated:YES];
+}
+
+- (void)homeViewPushRightActionHome {
+    
+    HomeViewController *homeViewController = [[HomeViewController alloc] init];
+    
+    NSMutableArray *vcs =  [NSMutableArray arrayWithArray:self.navigationController.viewControllers];
+    
+    [vcs insertObject:homeViewController atIndex:[vcs count] - 1];
+    
+    [self.navigationController setViewControllers:vcs animated:NO];
+    
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 @end
