@@ -1,0 +1,64 @@
+{
+   "department":[
+      {
+         "departmentID":1,
+         "departmentName":"iOS",
+         "employee":[
+            {
+               "employeeID":1,
+               "employeeName":"Hoang Dai Phong"
+            },
+            {
+               "employeeID":2,
+               "employeeName":"Nguyen Tuan Trung"
+            }
+         ]
+      },
+      {
+         "departmentID":"dp001",
+         "departmentName":"Android",
+         "employee":[
+            {
+               "employeeID":3,
+               "employeeName":"Huynh Tuan Kiet"
+            },
+            {
+               "employeeID":4,
+               "employeeName":"Le Tuan Vu"
+            }
+         ]
+      },
+      {
+         "departmentID":3,
+         "departmentName":"Flutter",
+         "employee":[
+            {
+               "employeeID":5,
+               "employeeName":"Le Cong Duong"
+            },
+            {
+               "employeeID":6,
+               "employeeName":"Nguyen Viet Anh"
+            }
+         ]
+      },
+      {
+         "departmentID":4,
+         "departmentName":"React Native",
+         "employee":[
+            {
+               "employeeID":7,
+               "employeeName":"Dau Xuan Duy"
+            },
+            {
+               "employeeID":8,
+               "employeeName":"Nguyen Van Toan"
+            },
+            {
+               "employeeID":9,
+               "employeeName":"Ngo Van Quy"
+            }
+         ]
+      }
+   ]
+}
