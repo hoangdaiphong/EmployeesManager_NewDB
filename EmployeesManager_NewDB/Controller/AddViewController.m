@@ -107,8 +107,6 @@
                     Employee *employee = [[Employee alloc] init];
                     
                     employee = employeeList[employeeList.count - 1];
-                    
-//                    int64_t employeeID = employee.employeeID;
                 
                     success = [[ContentManager shareManager] insertDepartmentEmployee:inputDepartment.departmentID employeeID:employee.employeeID];
                 //---------------------

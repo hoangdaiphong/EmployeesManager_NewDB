@@ -13,7 +13,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface HomeViewController : UIViewController<HomeViewDelegate>
+@interface HomeViewController : UIViewController
 
 @property (nonatomic, weak) IBOutlet UIImageView *img;
 

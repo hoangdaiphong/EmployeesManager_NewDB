@@ -8,7 +8,7 @@
 
 #import "DepartmentViewController.h"
 
-@interface DepartmentViewController ()
+@interface DepartmentViewController () <HomeViewDelegate>
 
 @end
 
@@ -212,6 +212,11 @@
     EmployeeViewController *employeeViewController = [[EmployeeViewController alloc] init];
     
     [self.navigationController pushViewController:employeeViewController animated:YES];
+
+    employeeViewController.allEmployee = YES;
+    
+    employeeViewController.allEmployeeTitle = YES;
+
 }
 
 - (void)homeViewPushRightActionHome {

@@ -8,7 +8,7 @@
 
 #import "EmployeeViewController.h"
 
-@interface EmployeeViewController ()
+@interface EmployeeViewController () <HomeViewDelegate>
 
 @end
 
@@ -16,7 +16,8 @@
 @synthesize containView;
 @synthesize tblEmployee;
 @synthesize inputDepartment;
-//@synthesize allEmployee;
+@synthesize allEmployee;
+@synthesize allEmployeeTitle;
 
 - (void)viewDidLoad {
     
@@ -31,7 +32,13 @@
     
     HeaderView *header = [[HeaderView alloc] init];
     
-    [header setHeaderWithTitle:inputDepartment.departmentName hideBack:YES hideAdd:NO inController:self];
+    if (allEmployeeTitle) {
+        
+        [header setHeaderWithTitle:@"全社員" hideBack:YES hideAdd:YES inController:self];
+    } else {
+        
+        [header setHeaderWithTitle:inputDepartment.departmentName hideBack:YES hideAdd:NO inController:self];
+    }
     
     header.delegate = self;
     
@@ -111,15 +118,28 @@
 #pragma mark - TableView's Delegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return [employeeListInDepartment count];
+    if(allEmployee) {
+        
+        return [employeeList count];
+    } else {
+        
+        return [employeeListInDepartment count];
+    }
+    
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     TableViewCell *cell = [self.tblEmployee dequeueReusableCellWithIdentifier:@"Cell"];
     //------------
+    if(allEmployee) {
+        
+        [cell setCellWithEmployee:[employeeList objectAtIndex:indexPath.row] atIndex:indexPath];
+    } else {
+        
+        [cell setCellWithEmployee:[employeeListInDepartment objectAtIndex:indexPath.row] atIndex:indexPath];
+    }
     
-    [cell setCellWithEmployee:[employeeListInDepartment objectAtIndex:indexPath.row] atIndex:indexPath];
     //------------
     cell.delegate = self;
     

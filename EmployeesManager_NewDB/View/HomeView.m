@@ -46,7 +46,11 @@
         
         [delegate homeViewPushRightActionEmployee];
     }
-    
+    //---------
+//    EmployeeViewController *employeeViewController = [[EmployeeViewController alloc] init];
+//
+//    employeeViewController.allEmployee = YES;
+    //---------
 }
 
 -(IBAction)departmentListAction:(id)sender {

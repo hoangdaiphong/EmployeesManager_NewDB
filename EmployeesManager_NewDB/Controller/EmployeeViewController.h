@@ -16,7 +16,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface EmployeeViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, HeaderViewDelegate, AddViewControllerDelegate, TableViewCellDelegate, HomeViewDelegate> {
+@interface EmployeeViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, HeaderViewDelegate, AddViewControllerDelegate, TableViewCellDelegate> {
 
     //----------
     NSMutableArray *employeeList;
@@ -31,7 +31,8 @@ NS_ASSUME_NONNULL_BEGIN
 //---------------
 @property (nonatomic, weak) Department *inputDepartment;
 
-//@property (nonatomic, assign) BOOL allEmployee;
+@property (nonatomic, assign) BOOL allEmployee;
+@property (nonatomic, assign) BOOL allEmployeeTitle;
 //---------------
 @end
 
