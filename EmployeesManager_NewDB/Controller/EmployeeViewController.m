@@ -249,73 +249,83 @@
 }
 
 - (void)tableViewCellDeleteAtIndex:(NSIndexPath *)index {
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"削除の確認" message:@"本当に削除してもいいですか？" preferredStyle:UIAlertControllerStyleAlert];
     
-    if(allEmployee) {
-        if(isFiltered){
-            if ([[ContentManager shareManager] deleteEmployee:[filteredEmployees objectAtIndex:index.row]]) {
-                
-                [filteredEmployees removeObjectAtIndex:index.row];
-                
-                [tblEmployee beginUpdates];
-                
-                [tblEmployee deleteRowsAtIndexPaths:@[index] withRowAnimation:UITableViewRowAnimationLeft];
-                
-                [tblEmployee endUpdates];
-                
-                [tblEmployee reloadData];
+    UIAlertAction *actionDelete = [UIAlertAction actionWithTitle:@"はい" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+        if(self->allEmployee) {
+            if(self->isFiltered){
+                if ([[ContentManager shareManager] deleteEmployee:[self->filteredEmployees objectAtIndex:index.row]]) {
+                    
+                    [self->filteredEmployees removeObjectAtIndex:index.row];
+                    
+                    [self->tblEmployee beginUpdates];
+                    
+                    [self->tblEmployee deleteRowsAtIndexPaths:@[index] withRowAnimation:UITableViewRowAnimationLeft];
+                    
+                    [self->tblEmployee endUpdates];
+                    
+                    [self->tblEmployee reloadData];
+                }
+                if ([[ContentManager shareManager] deleteDepartmentEmployee:[self->departmentEmployeeForSearch objectAtIndex:index.row]]) {
+                    
+                    [self->departmentEmployeeForSearch removeObjectAtIndex:index.row];
+                    
+                    [self->tblEmployee reloadData];
+                }
+            } else {
+                // Xoa Employee
+                if ([[ContentManager shareManager] deleteEmployee:[self->employeeList objectAtIndex:index.row]]) {
+                    
+                    [self->employeeList removeObjectAtIndex:index.row];
+                    
+                    [self->tblEmployee beginUpdates];
+                    
+                    [self->tblEmployee deleteRowsAtIndexPaths:@[index] withRowAnimation:UITableViewRowAnimationLeft];
+                    
+                    [self->tblEmployee endUpdates];
+                    
+                    [self->tblEmployee reloadData];
+                }
+                // Xoa DepartmentEmployee
+                [self getAllDepartmentEmployee];
+                if ([[ContentManager shareManager] deleteDepartmentEmployee:[self->allDepartmentEmployeeList objectAtIndex:index.row]]) {
+                    
+                    [self->allDepartmentEmployeeList removeObjectAtIndex:index.row];
+                    
+                    [self->tblEmployee reloadData];
+                }
             }
-            if ([[ContentManager shareManager] deleteDepartmentEmployee:[departmentEmployeeForSearch objectAtIndex:index.row]]) {
-
-                [departmentEmployeeForSearch removeObjectAtIndex:index.row];
-
-                [tblEmployee reloadData];
-            }
+            
         } else {
             // Xoa Employee
-            if ([[ContentManager shareManager] deleteEmployee:[employeeList objectAtIndex:index.row]]) {
+            if ([[ContentManager shareManager] deleteEmployee:[self->employeeListInDepartment objectAtIndex:index.row]]) {
                 
-                [employeeList removeObjectAtIndex:index.row];
+                [self->employeeListInDepartment removeObjectAtIndex:index.row];
                 
-                [tblEmployee beginUpdates];
+                [self->tblEmployee beginUpdates];
                 
-                [tblEmployee deleteRowsAtIndexPaths:@[index] withRowAnimation:UITableViewRowAnimationLeft];
+                [self->tblEmployee deleteRowsAtIndexPaths:@[index] withRowAnimation:UITableViewRowAnimationLeft];
                 
-                [tblEmployee endUpdates];
+                [self->tblEmployee endUpdates];
                 
-                [tblEmployee reloadData];
+                [self->tblEmployee reloadData];
             }
             // Xoa DepartmentEmployee
-            [self getAllDepartmentEmployee];
-            if ([[ContentManager shareManager] deleteDepartmentEmployee:[allDepartmentEmployeeList objectAtIndex:index.row]]) {
+            if ([[ContentManager shareManager] deleteDepartmentEmployee:[self->departmentEmployeeList objectAtIndex:index.row]]) {
                 
-                [allDepartmentEmployeeList removeObjectAtIndex:index.row];
+                [self->departmentEmployeeList removeObjectAtIndex:index.row];
                 
-                [tblEmployee reloadData];
+                [self->tblEmployee reloadData];
             }
         }
-        
-    } else {
-        // Xoa Employee
-        if ([[ContentManager shareManager] deleteEmployee:[employeeListInDepartment objectAtIndex:index.row]]) {
-            
-            [employeeListInDepartment removeObjectAtIndex:index.row];
-            
-            [tblEmployee beginUpdates];
-            
-            [tblEmployee deleteRowsAtIndexPaths:@[index] withRowAnimation:UITableViewRowAnimationLeft];
-            
-            [tblEmployee endUpdates];
-            
-            [tblEmployee reloadData];
-        }
-         // Xoa DepartmentEmployee
-        if ([[ContentManager shareManager] deleteDepartmentEmployee:[departmentEmployeeList objectAtIndex:index.row]]) {
-
-            [departmentEmployeeList removeObjectAtIndex:index.row];
-
-            [tblEmployee reloadData];
-        }
-    }
+    }];
+    UIAlertAction *actionCancel = [UIAlertAction actionWithTitle:@"いいえ" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {}];
+    [actionCancel setValue:[UIColor redColor] forKey:@"titleTextColor"];
+    
+    [alert addAction:actionDelete];
+    [alert addAction:actionCancel];
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 #pragma mark - HomeView's delegate

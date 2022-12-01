@@ -153,42 +153,52 @@
 
 - (void)tableViewCellDeleteAtIndex:(NSIndexPath *)index {
     
-    inputDepartment = [departmentList objectAtIndex:index.row];
-    // Xoa employeesList
-    [self getEmployeeListInDepartment];
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"削除の確認" message:@"本当に削除してもいいですか？" preferredStyle:UIAlertControllerStyleAlert];
     
-        for (long i = employeeListInDepartment.count; i > 0; i--) {
+    UIAlertAction *actionDelete = [UIAlertAction actionWithTitle:@"はい" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+        self->inputDepartment = [self->departmentList objectAtIndex:index.row];
+        // Xoa employeesList
+        [self getEmployeeListInDepartment];
+        
+        for (long i = self->employeeListInDepartment.count; i > 0; i--) {
             
-            if ([[ContentManager shareManager] deleteDepartmentEmployee:employeeListInDepartment[i - 1]]) {
+            if ([[ContentManager shareManager] deleteDepartmentEmployee:self->employeeListInDepartment[i - 1]]) {
                 
-                [employeeListInDepartment removeObjectAtIndex:(i - 1)];
+                [self->employeeListInDepartment removeObjectAtIndex:(i - 1)];
             }
         }
-    
-    // Xoa departmentEmployeeList
-    [self getEmployeeDepartment];
-
-        for (long i = departmentEmployeeList.count; i > 0; i--) {
-    
-            if ([[ContentManager shareManager] deleteDepartmentEmployee:departmentEmployeeList[i - 1]]) {
-    
-                [departmentEmployeeList removeObjectAtIndex:(i - 1)];
+        // Xoa departmentEmployeeList
+        [self getEmployeeDepartment];
+        
+        for (long i = self->departmentEmployeeList.count; i > 0; i--) {
+            
+            if ([[ContentManager shareManager] deleteDepartmentEmployee:self->departmentEmployeeList[i - 1]]) {
+                
+                [self->departmentEmployeeList removeObjectAtIndex:(i - 1)];
             }
         }
+        // Xoa Department
+        if ([[ContentManager shareManager] deleteDepartment:[self->departmentList objectAtIndex:index.row]]) {
+            
+            [self->departmentList removeObjectAtIndex:index.row];
+            
+            [self->tblDepartment beginUpdates];
+            
+            [self->tblDepartment deleteRowsAtIndexPaths:@[index] withRowAnimation:UITableViewRowAnimationLeft];
+            
+            [self->tblDepartment endUpdates];
+            
+            [self->tblDepartment reloadData];
+        }
+    }];
 
-    // Xoa Department
-    if ([[ContentManager shareManager] deleteDepartment:[departmentList objectAtIndex:index.row]]) {
-        
-        [departmentList removeObjectAtIndex:index.row];
-        
-        [tblDepartment beginUpdates];
-        
-        [tblDepartment deleteRowsAtIndexPaths:@[index] withRowAnimation:UITableViewRowAnimationLeft];
-        
-        [tblDepartment endUpdates];
-        
-        [tblDepartment reloadData];
-    }
+    UIAlertAction *actionCancel = [UIAlertAction actionWithTitle:@"いいえ" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {}];
+    [actionCancel setValue:[UIColor redColor] forKey:@"titleTextColor"];
+    
+    [alert addAction:actionDelete];
+    [alert addAction:actionCancel];
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 - (void)tableViewCellEditAtIndex:(NSIndexPath *)index {
