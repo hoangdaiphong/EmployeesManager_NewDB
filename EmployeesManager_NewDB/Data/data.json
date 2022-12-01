@@ -1,61 +1,61 @@
 {
    "department":[
       {
-         "departmentID":1,
+         "departmentID":"Jdep001",
          "departmentName":"iOS",
          "employee":[
             {
-               "employeeID":1,
+               "employeeID":"Jemp001",
                "employeeName":"Hoang Dai Phong"
             },
             {
-               "employeeID":2,
+               "employeeID":"Jemp002",
                "employeeName":"Nguyen Tuan Trung"
             }
          ]
       },
       {
-         "departmentID":"dp001",
+         "departmentID":"Jdep002",
          "departmentName":"Android",
          "employee":[
             {
-               "employeeID":3,
+               "employeeID":"Jemp003",
                "employeeName":"Huynh Tuan Kiet"
             },
             {
-               "employeeID":4,
+               "employeeID":"Jemp004",
                "employeeName":"Le Tuan Vu"
             }
          ]
       },
       {
-         "departmentID":3,
+         "departmentID":"Jdep003",
          "departmentName":"Flutter",
          "employee":[
             {
-               "employeeID":5,
+               "employeeID":"Jemp005",
                "employeeName":"Le Cong Duong"
             },
             {
-               "employeeID":6,
+               "employeeID":"Jemp006",
                "employeeName":"Nguyen Viet Anh"
             }
          ]
       },
       {
-         "departmentID":4,
+         "departmentID":"Jdep004",
          "departmentName":"React Native",
          "employee":[
             {
-               "employeeID":7,
+               "employeeID":"Jemp007",
                "employeeName":"Dau Xuan Duy"
             },
             {
-               "employeeID":8,
+               "employeeID":"Jemp008",
                "employeeName":"Nguyen Van Toan"
             },
             {
-               "employeeID":9,
+               "employeeID":"Jemp009",
                "employeeName":"Ngo Van Quy"
             }
          ]

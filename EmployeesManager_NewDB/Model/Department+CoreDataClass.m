@@ -16,13 +16,18 @@
     
     [super awakeFromInsert];
     
-    self.departmentID = [NSString stringWithFormat:@"dep00%ld",[self __getMaxID]];
-}
-
-- (NSInteger)__getMaxID {
+    static int departmentID = 1;
     
-    return [[ContentManager shareManager] getAllDepartment].count;
+    self.departmentID = [NSString stringWithFormat:@"dep00%d", departmentID];
+    
+    departmentID += 1;
+    
 }
+//
+//- (NSInteger)__getMaxID {
+//
+//    return [[ContentManager shareManager] getAllDepartment].count;
+//}
 //--------------------
 
 @end
