@@ -27,7 +27,7 @@
     
     [super awakeFromNib];
     
-    [self setBackgroundColor:[UIColor whiteColor]];
+    [self setBackgroundColor:[UIColor colorWithRed:18/255.f green:14/255.f blue:152/255.f alpha:0.1]];
 }
 
 - (void)setHeaderWithTitle:(NSString *)title hideBack:(BOOL)hideBack hideAdd:(BOOL)hideAdd inController:(nonnull UIViewController *)controller {
