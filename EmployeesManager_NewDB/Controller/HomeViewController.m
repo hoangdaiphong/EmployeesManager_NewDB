@@ -36,11 +36,13 @@
     
 //    NSMutableArray *list = [[NSMutableArray alloc] init];
 //    NSString *name = [[NSString alloc] init];
-//    name = @"Hoang Dai Phong";
+//    name = @"h";
 //    [list addObjectsFromArray:[[ContentManager shareManager] searchEmployee:name]];
 //    Employee *employee = [[Employee alloc] init];
-//    employee = list[1];
-//    NSLog(@"%lu", (unsigned long)list.count);
+//    for (int i = 0; i < list.count; i++) {
+//        employee = list[i];
+//        NSLog(@"%@", employee.employeeName);
+//    }
 }
 
 - (void)setupView {

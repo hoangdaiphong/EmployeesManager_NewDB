@@ -267,7 +267,7 @@
     
     NSFetchRequest *request = [Employee fetchRequest];
     
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"employeeName LIKE %@", employeeName];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"employeeName contains %@", employeeName];
     
     [request setPredicate:predicate];
     

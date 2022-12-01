@@ -23,6 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, weak) IBOutlet UIButton *btnDepartment;
 @property (nonatomic, weak) IBOutlet UIButton *btnEmployee;
+@property (nonatomic, weak) IBOutlet UIButton *btnSearch;
 
 @property (nonatomic, weak) id<HomeViewDelegate> delegate;
 
