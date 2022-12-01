@@ -18,6 +18,7 @@
 		57792E6029372ECE00AFB71E /* department.png in Resources */ = {isa = PBXBuildFile; fileRef = 57792E5E29372ECE00AFB71E /* department.png */; };
 		57792E6129372ECE00AFB71E /* home.png in Resources */ = {isa = PBXBuildFile; fileRef = 57792E5F29372ECE00AFB71E /* home.png */; };
 		57792E63293737ED00AFB71E /* company.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 57792E62293737EC00AFB71E /* company.jpg */; };
+		57792E6829382E3A00AFB71E /* JSON_Manger.m in Sources */ = {isa = PBXBuildFile; fileRef = 57792E6729382E3A00AFB71E /* JSON_Manger.m */; };
 		57D64D34293075CF0003F280 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 57D64D33293075CF0003F280 /* AppDelegate.m */; };
 		57D64D3D293075CF0003F280 /* EmployeesManager_NewDB.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 57D64D3B293075CF0003F280 /* EmployeesManager_NewDB.xcdatamodeld */; };
 		57D64D3F293075D20003F280 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 57D64D3E293075D20003F280 /* Assets.xcassets */; };
@@ -61,6 +62,8 @@
 		57792E5E29372ECE00AFB71E /* department.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = department.png; sourceTree = "<group>"; };
 		57792E5F29372ECE00AFB71E /* home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home.png; sourceTree = "<group>"; };
 		57792E62293737EC00AFB71E /* company.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = company.jpg; sourceTree = "<group>"; };
+		57792E6629382E3A00AFB71E /* JSON_Manger.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JSON_Manger.h; sourceTree = "<group>"; };
+		57792E6729382E3A00AFB71E /* JSON_Manger.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JSON_Manger.m; sourceTree = "<group>"; };
 		57D64D2F293075CF0003F280 /* EmployeesManager_NewDB.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EmployeesManager_NewDB.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		57D64D32293075CF0003F280 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		57D64D33293075CF0003F280 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -125,6 +128,33 @@
 			path = Data;
 			sourceTree = "<group>";
 		};
+		57792E6529382C4D00AFB71E /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				57D64D7F29309BBA0003F280 /* add.png */,
+				57D64D7E29309BBA0003F280 /* apply.png */,
+				57D64D8029309BBB0003F280 /* back.png */,
+				57D64D7D29309BBA0003F280 /* edit-.png */,
+				57D64D7C29309BBA0003F280 /* remove.png */,
+				57792E5429371F0C00AFB71E /* manager.png */,
+				57792E5E29372ECE00AFB71E /* department.png */,
+				57792E5F29372ECE00AFB71E /* home.png */,
+				57792E62293737EC00AFB71E /* company.jpg */,
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
+		57792E6929382E4400AFB71E /* DataBaseManager */ = {
+			isa = PBXGroup;
+			children = (
+				57D64D642930832A0003F280 /* ContentManager.h */,
+				57D64D652930832A0003F280 /* ContentManager.m */,
+				57792E6629382E3A00AFB71E /* JSON_Manger.h */,
+				57792E6729382E3A00AFB71E /* JSON_Manger.m */,
+			);
+			path = DataBaseManager;
+			sourceTree = "<group>";
+		};
 		57D64D26293075CF0003F280 = {
 			isa = PBXGroup;
 			children = (
@@ -148,19 +178,10 @@
 				57D64D32293075CF0003F280 /* AppDelegate.h */,
 				57D64D33293075CF0003F280 /* AppDelegate.m */,
 				57D64D6B293096430003F280 /* Constant.h */,
-				57D64D642930832A0003F280 /* ContentManager.h */,
-				57D64D652930832A0003F280 /* ContentManager.m */,
-				57D64D7F29309BBA0003F280 /* add.png */,
-				57D64D7E29309BBA0003F280 /* apply.png */,
-				57D64D8029309BBB0003F280 /* back.png */,
-				57D64D7D29309BBA0003F280 /* edit-.png */,
-				57D64D7C29309BBA0003F280 /* remove.png */,
-				57792E5429371F0C00AFB71E /* manager.png */,
-				57792E5E29372ECE00AFB71E /* department.png */,
-				57792E5F29372ECE00AFB71E /* home.png */,
-				57792E62293737EC00AFB71E /* company.jpg */,
 				57792E4B2936E2A900AFB71E /* Data */,
+				57792E6929382E4400AFB71E /* DataBaseManager */,
 				57D64D6E293097B40003F280 /* View */,
+				57792E6529382C4D00AFB71E /* Images */,
 				57D64D5E2930816A0003F280 /* Controller */,
 				57D64D4B293080710003F280 /* Model */,
 				57D64D3E293075D20003F280 /* Assets.xcassets */,
@@ -326,6 +347,7 @@
 				57D64D75293097EE0003F280 /* TableViewCell.m in Sources */,
 				57D64D5C293080C20003F280 /* DepartmentEmployee+CoreDataClass.m in Sources */,
 				57D64D5A293080C20003F280 /* Department+CoreDataClass.m in Sources */,
+				57792E6829382E3A00AFB71E /* JSON_Manger.m in Sources */,
 				57D64D45293075D20003F280 /* main.m in Sources */,
 				57D64D62293081940003F280 /* DepartmentViewController.m in Sources */,
 				57D64D662930832A0003F280 /* ContentManager.m in Sources */,

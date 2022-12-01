@@ -14,7 +14,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface Department : NSManagedObject
 
-
 @end
 
 NS_ASSUME_NONNULL_END

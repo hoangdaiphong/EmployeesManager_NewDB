@@ -51,6 +51,27 @@
     }
 }
 
+- (BOOL)insertDepartment:(NSString *)name departmentID:(NSString *)departmentID {
+    
+    NSManagedObjectContext *context = [self getCurrentContext];
+    
+    Department *department = [NSEntityDescription insertNewObjectForEntityForName:@"Department" inManagedObjectContext:context];
+    
+    department.departmentName = name;
+    
+    department.departmentID = departmentID;
+    
+    NSError *error = nil;
+    
+    if (![context save:&error]) {
+        
+        return  NO;
+    } else {
+        
+        return YES;
+    }
+}
+
 - (BOOL)deleteDepartment:(Department *)department {
     
     NSManagedObjectContext *context = [self getCurrentContext];
@@ -107,6 +128,26 @@
 }
 
 #pragma mark - Employee
+- (BOOL)insertEmployee:(NSString *)name employeeID:(NSString *)employeeID {
+    
+    NSManagedObjectContext *context = [self getCurrentContext];
+    
+    Employee *employee = [NSEntityDescription insertNewObjectForEntityForName:@"Employee" inManagedObjectContext:context];
+    
+    employee.employeeName = name;
+    employee.employeeID = employeeID;
+    
+    NSError *error = nil;
+    
+    if (![context save:&error]) {
+        
+        return  NO;
+    } else {
+        
+        return YES;
+    }
+}
+
 - (BOOL)insertEmployeeWithName:(NSString *)name {
     
     NSManagedObjectContext *context = [self getCurrentContext];

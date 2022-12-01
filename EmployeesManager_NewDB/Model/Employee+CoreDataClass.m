@@ -12,17 +12,6 @@
 @implementation Employee
 
 //--------------------
-//- (void)awakeFromInsert {
-//
-//    [super awakeFromInsert];
-//
-//    self.employeeID = [NSString stringWithFormat:@"emp00%ld",[self __getMaxID]];
-//}
-//
-//- (NSInteger)__getMaxID {
-//
-//    return [[ContentManager shareManager] getAllEmployee].count;
-//}
 - (void)awakeFromInsert {
     [super awakeFromInsert];
     
@@ -32,6 +21,6 @@
     
     employeeID += 1;
 }
-
+//--------------------
 @end
 

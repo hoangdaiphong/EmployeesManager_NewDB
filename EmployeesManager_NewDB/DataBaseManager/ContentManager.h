@@ -23,6 +23,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (BOOL)insertDepartmentWithName:(NSString *)name;
 
+- (BOOL)insertDepartment:(NSString *)name departmentID:(NSString *)departmentID;
+
 - (BOOL)deleteDepartment:(Department *)department;
 
 - (BOOL)editDepartment:(Department *)department;
@@ -33,6 +35,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSArray *)getAllEmployee;
 
 - (BOOL)insertEmployeeWithName:(NSString *)name;
+
+- (BOOL)insertEmployee:(NSString *)name employeeID:(NSString *)employeeID;
 
 - (BOOL)deleteEmployee:(Employee *)employee;
 

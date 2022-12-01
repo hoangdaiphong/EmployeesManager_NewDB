@@ -23,11 +23,4 @@
     departmentID += 1;
     
 }
-//
-//- (NSInteger)__getMaxID {
-//
-//    return [[ContentManager shareManager] getAllDepartment].count;
-//}
-//--------------------
-
 @end

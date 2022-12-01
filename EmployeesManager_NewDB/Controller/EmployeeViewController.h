@@ -22,6 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
     NSMutableArray *employeeList;
     NSMutableArray *employeeListInDepartment;
     NSMutableArray *departmentEmployeeList;
+    NSMutableArray *allDepartmentEmployeeList;
     //----------
 }
 

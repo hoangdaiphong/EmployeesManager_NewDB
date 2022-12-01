@@ -82,6 +82,13 @@
     
     [departmentEmployeeList addObjectsFromArray:[[ContentManager shareManager] getDepartmentEmployee:inputDepartment.departmentID]];
 }
+//Lay danh sach toan bo EmployeeDepartment
+- (void)getAllDepartmentEmployee {
+    
+    allDepartmentEmployeeList = [[NSMutableArray alloc] init];
+    
+    [allDepartmentEmployeeList addObjectsFromArray:[[ContentManager shareManager] getAllDepartmentEmployee]];
+}
 // Lay danh sach Employee co Employee trong EmployeeDepartment
 - (void)getEmployeeListInDepartment {
     
@@ -125,12 +132,12 @@
         
         return [employeeListInDepartment count];
     }
-    
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     TableViewCell *cell = [self.tblEmployee dequeueReusableCellWithIdentifier:@"Cell"];
+    
     //------------
     if(allEmployee) {
         
@@ -139,8 +146,8 @@
         
         [cell setCellWithEmployee:[employeeListInDepartment objectAtIndex:indexPath.row] atIndex:indexPath];
     }
-    
     //------------
+    
     cell.delegate = self;
     
     return cell;
@@ -154,42 +161,86 @@
 #pragma mark - TableViewCell's Delegate
 - (void)tableViewCellEditAtIndex:(NSIndexPath *)index {
     
-    if ([[ContentManager shareManager] editEmployee:[employeeListInDepartment objectAtIndex:index.row]]) {
-
-        AddViewController *addView = [[AddViewController alloc] init];
-        
-        addView.isEmployee = YES;
-        
-        addView.editFlag = YES;
-        
-        addView.delegate = self;
-        
-        addView.inputEmployee = [employeeListInDepartment objectAtIndex:index.row];
-        
-        [self.navigationController pushViewController:addView animated:YES];
+    if (allEmployee) {
+        // Sua Employee trong man hinh all Employee
+        if ([[ContentManager shareManager] editEmployee:[employeeList objectAtIndex:index.row]]) {
+            
+            AddViewController *addView = [[AddViewController alloc] init];
+            
+            addView.isEmployee = YES;
+            
+            addView.editFlag = YES;
+            
+            addView.delegate = self;
+            
+            addView.inputEmployee = [employeeList objectAtIndex:index.row];
+            
+            [self.navigationController pushViewController:addView animated:YES];
+        }
+    } else {
+        // Sua Employee trong Department
+        if ([[ContentManager shareManager] editEmployee:[employeeListInDepartment objectAtIndex:index.row]]) {
+            
+            AddViewController *addView = [[AddViewController alloc] init];
+            
+            addView.isEmployee = YES;
+            
+            addView.editFlag = YES;
+            
+            addView.delegate = self;
+            
+            addView.inputEmployee = [employeeListInDepartment objectAtIndex:index.row];
+            
+            [self.navigationController pushViewController:addView animated:YES];
+        }
     }
 }
 
 - (void)tableViewCellDeleteAtIndex:(NSIndexPath *)index {
     
-    if ([[ContentManager shareManager] deleteEmployee:[employeeListInDepartment objectAtIndex:index.row]]) {
-        
-        [employeeListInDepartment removeObjectAtIndex:index.row];
-        
-        [tblEmployee beginUpdates];
-        
-        [tblEmployee deleteRowsAtIndexPaths:@[index] withRowAnimation:UITableViewRowAnimationLeft];
-        
-        [tblEmployee endUpdates];
-        
-        [tblEmployee reloadData];
-    }
-    
-    if ([[ContentManager shareManager] deleteDepartmentEmployee:[departmentEmployeeList objectAtIndex:index.row]]) {
-        
-        [departmentEmployeeList removeObjectAtIndex:index.row];
-        
-        [tblEmployee reloadData];
+    if(allEmployee) {
+        // Xoa Employee
+        if ([[ContentManager shareManager] deleteEmployee:[employeeList objectAtIndex:index.row]]) {
+
+            [employeeList removeObjectAtIndex:index.row];
+
+            [tblEmployee beginUpdates];
+
+            [tblEmployee deleteRowsAtIndexPaths:@[index] withRowAnimation:UITableViewRowAnimationLeft];
+
+            [tblEmployee endUpdates];
+
+            [tblEmployee reloadData];
+        }
+         // Xoa DepartmentEmployee
+        [self getAllDepartmentEmployee];
+        if ([[ContentManager shareManager] deleteDepartmentEmployee:[allDepartmentEmployeeList objectAtIndex:index.row]]) {
+            
+            [allDepartmentEmployeeList removeObjectAtIndex:index.row];
+
+            [tblEmployee reloadData];
+        }
+    } else {
+        // Xoa Employee
+        if ([[ContentManager shareManager] deleteEmployee:[employeeListInDepartment objectAtIndex:index.row]]) {
+            
+            [employeeListInDepartment removeObjectAtIndex:index.row];
+            
+            [tblEmployee beginUpdates];
+            
+            [tblEmployee deleteRowsAtIndexPaths:@[index] withRowAnimation:UITableViewRowAnimationLeft];
+            
+            [tblEmployee endUpdates];
+            
+            [tblEmployee reloadData];
+        }
+         // Xoa DepartmentEmployee
+        if ([[ContentManager shareManager] deleteDepartmentEmployee:[departmentEmployeeList objectAtIndex:index.row]]) {
+
+            [departmentEmployeeList removeObjectAtIndex:index.row];
+
+            [tblEmployee reloadData];
+        }
     }
 }
 
@@ -218,8 +269,16 @@
     [self.navigationController setViewControllers:vcs animated:NO];
     
     [self.navigationController popViewControllerAnimated:YES];
-    
 }
 
-
+- (void)homeViewPushRightActionEmployee {
+    
+    EmployeeViewController *employeeViewController = [[EmployeeViewController alloc] init];
+    
+    [self.navigationController pushViewController:employeeViewController animated:YES];
+    
+    employeeViewController.allEmployee = YES;
+    
+    employeeViewController.allEmployeeTitle = YES;
+}
 @end

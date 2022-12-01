@@ -17,9 +17,8 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     
-    // Lấy địa chỉ file chứa database
-    NSArray<NSString *> *dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentationDirectory, NSUserDomainMask, YES);
-    NSLog(@"%@", dirPaths);
+//    NSArray<NSString *> *dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentationDirectory, NSUserDomainMask, YES);
+//    NSLog(@"%@", dirPaths);
     
     [super viewWillAppear:animated];
     
@@ -30,8 +29,10 @@
     
     [super viewDidLoad];
     
-    
     [self setupView];
+    
+    [[JSON_Manger parseJSON] parseJSONDepartment];
+    [[JSON_Manger parseJSON] parseJSONEmployee];
 }
 
 - (void)setupView {
@@ -46,7 +47,6 @@
     [homeView setHomeView];
     homeView.delegate = self;
     [containView addSubview:homeView];
-    
 }
 
 #pragma HomeView delegate
@@ -68,5 +68,4 @@
     
     [self.navigationController pushViewController:departmentViewController animated:YES];
 }
-
 @end

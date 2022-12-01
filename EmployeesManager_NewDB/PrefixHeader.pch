@@ -15,4 +15,5 @@
 #endif /* PrefixHeader_pch */
 
 #import "ContentManager.h"
+#import "JSON_Manger.h"
 #import "Constant.h"

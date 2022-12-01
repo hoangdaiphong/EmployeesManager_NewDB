@@ -68,7 +68,7 @@
     //--------------
     // Lay danh sach employee trong Department va Lay danh sach departmentEmployee trung DepartmentID
     [self getEmployeeListInDepartment];
-    //--------------
+    
     [tblDepartment reloadData];
 }
 
@@ -170,7 +170,6 @@
             }
         }
     //-------------
-    
     // Xoa Department
     if ([[ContentManager shareManager] deleteDepartment:[departmentList objectAtIndex:index.row]]) {
         
@@ -184,8 +183,6 @@
         
         [tblDepartment reloadData];
     }
-    
-
 }
 
 - (void)tableViewCellEditAtIndex:(NSIndexPath *)index {
@@ -212,7 +209,6 @@
     employeeViewController.allEmployee = YES;
     
     employeeViewController.allEmployeeTitle = YES;
-
 }
 
 - (void)homeViewPushRightActionHome {
