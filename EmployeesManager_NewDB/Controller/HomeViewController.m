@@ -39,7 +39,7 @@
     
     [containView setFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
     
-    UIImageView *myImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 52, 395, 626)];
+    UIImageView *myImage = [[UIImageView alloc] initWithFrame:CGRectMake(-20, 52, 405, 636)];
     myImage.image = [UIImage imageNamed:@"company.jpg"];
     [containView addSubview:myImage];
 
