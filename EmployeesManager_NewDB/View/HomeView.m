@@ -12,6 +12,9 @@
 @synthesize btnDepartment;
 @synthesize btnEmployee;
 @synthesize delegate;
+@synthesize imgHomeLine;
+@synthesize imgDepartmentLine;
+@synthesize imgEmployeeLine;
 
 - (instancetype)init {
     
@@ -27,13 +30,17 @@
     [self setBackgroundColor:[UIColor whiteColor]];
 }
 
-- (void)setHomeView {
+- (void)setHomeView:(BOOL)hideHome hideDepartment:(BOOL)hideDepartment hideEmployee:(BOOL)hideEmployee {
     
     [self setFrame:CGRectMake(0, SCREEN_HEIGHT - self.bounds.size.height, SCREEN_WIDTH, self.bounds.size.height)];
+    
+    self.imgHomeLine.hidden = hideHome;
+    self.imgDepartmentLine.hidden = hideDepartment;
+    self.imgEmployeeLine.hidden = hideEmployee;
 }
 
 -(IBAction)homeAction:(id)sender {
-    
+  
     if (delegate != nil && [delegate respondsToSelector:@selector(homeViewPushRightActionHome)]) {
         
         [delegate homeViewPushRightActionHome];
@@ -46,11 +53,6 @@
         
         [delegate homeViewPushRightActionEmployee];
     }
-    //---------
-//    EmployeeViewController *employeeViewController = [[EmployeeViewController alloc] init];
-//
-//    employeeViewController.allEmployee = YES;
-    //---------
 }
 
 -(IBAction)departmentListAction:(id)sender {

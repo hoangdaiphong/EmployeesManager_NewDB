@@ -23,11 +23,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, weak) IBOutlet UIButton *btnDepartment;
 @property (nonatomic, weak) IBOutlet UIButton *btnEmployee;
-@property (nonatomic, weak) IBOutlet UIButton *btnSearch;
+
+@property (weak, nonatomic) IBOutlet UIImageView *imgHomeLine;
+@property (weak, nonatomic) IBOutlet UIImageView *imgDepartmentLine;
+@property (weak, nonatomic) IBOutlet UIImageView *imgEmployeeLine;
 
 @property (nonatomic, weak) id<HomeViewDelegate> delegate;
 
-- (void)setHomeView;
+- (void)setHomeView:(BOOL)hideHome hideDepartment:(BOOL)hideDepartment hideEmployee:(BOOL)hideEmployee;
 
 @end
 

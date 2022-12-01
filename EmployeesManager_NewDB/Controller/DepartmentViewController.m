@@ -52,7 +52,7 @@
     tblDepartment.delegate = self;
     
     HomeView *homeView = [[HomeView alloc] init];
-    [homeView setHomeView];
+    [homeView setHomeView:YES hideDepartment:NO hideEmployee:YES];
     homeView.delegate = self;
     [containView addSubview:homeView];
     

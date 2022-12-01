@@ -33,16 +33,6 @@
     
     [[JSON_Manger parseJSON] parseJSONDepartment];
     [[JSON_Manger parseJSON] parseJSONEmployee];
-    
-//    NSMutableArray *list = [[NSMutableArray alloc] init];
-//    NSString *name = [[NSString alloc] init];
-//    name = @"h";
-//    [list addObjectsFromArray:[[ContentManager shareManager] searchEmployee:name]];
-//    Employee *employee = [[Employee alloc] init];
-//    for (int i = 0; i < list.count; i++) {
-//        employee = list[i];
-//        NSLog(@"%@", employee.employeeName);
-//    }
 }
 
 - (void)setupView {
@@ -54,7 +44,7 @@
     [containView addSubview:myImage];
 
     HomeView *homeView = [[HomeView alloc] init];
-    [homeView setHomeView];
+    [homeView setHomeView:NO hideDepartment:YES hideEmployee:YES];
     homeView.delegate = self;
     [containView addSubview:homeView];
 }
