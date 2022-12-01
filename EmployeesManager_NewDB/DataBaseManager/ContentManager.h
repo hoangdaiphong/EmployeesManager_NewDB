@@ -57,6 +57,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (NSArray *)getDepartmentEmployee:(NSString *)departmentID;
 
+- (NSArray *)getDepartmentEmployeeForSearch:(NSArray *)employeeList;
+
 - (NSArray *)getAllDepartmentEmployee;
 
 @end

@@ -389,6 +389,53 @@
     return list2;
 }
 
+- (NSArray *)getDepartmentEmployeeForSearch:(NSArray *)employeeList {
+    
+    NSManagedObjectContext *context = [self getCurrentContext];
+    
+    NSFetchRequest *request = [DepartmentEmployee fetchRequest];
+    
+    NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"departmentID" ascending:YES];
+    
+    request.sortDescriptors = @[sort];
+    
+    NSError *error = nil;
+    
+    NSArray *list = [context executeFetchRequest:request error:&error];
+    
+    NSMutableArray *list2 = [[NSMutableArray alloc] init];
+    
+    for (int i = 0; i < employeeList.count; i++) {
+        
+        Employee *employee = [[Employee alloc] init];
+        
+        employee = employeeList[i];
+        
+        NSString *employeeID = [[NSString alloc] init];
+        
+        employeeID = employee.employeeID;
+        
+        for (int j = 0; j < list.count; j++) {
+            
+            DepartmentEmployee *departmentEmployee = [[DepartmentEmployee alloc] init];
+            
+            departmentEmployee = list[j];
+            
+            NSString *departmentEmployeeID = [[NSString alloc] init];
+            
+            departmentEmployeeID = departmentEmployee.employeeID;
+            
+            if (departmentEmployeeID == employeeID) {
+                
+                [list2 addObject:departmentEmployee];
+                
+                break;
+            }
+        }
+    }
+    return list2;
+}
+
 - (NSArray *)getAllDepartmentEmployee {
     
     NSManagedObjectContext *context = [self getCurrentContext];

@@ -8,7 +8,7 @@
 
 #import "EmployeeViewController.h"
 
-@interface EmployeeViewController () <HomeViewDelegate>
+@interface EmployeeViewController () <HomeViewDelegate, UISearchBarDelegate>
 
 @end
 
@@ -18,6 +18,8 @@
 @synthesize inputDepartment;
 @synthesize allEmployee;
 @synthesize allEmployeeTitle;
+@synthesize searchBar;
+@synthesize isFiltered;
 
 - (void)viewDidLoad {
     
@@ -32,8 +34,13 @@
     
     HeaderView *header = [[HeaderView alloc] init];
     
-    if (allEmployeeTitle) {
+    isFiltered = NO;
+    searchBar.delegate = self;
+    [searchBar setHidden:YES];
+    
+    if (allEmployee) {
         
+        [searchBar setHidden:NO];
         [header setHeaderWithTitle:@"全社員" hideBack:YES hideAdd:YES inController:self];
     } else {
         
@@ -44,7 +51,13 @@
     
     [self.view addSubview:header];
     
-    [tblEmployee setFrame:CGRectMake(0, header.bounds.size.height, SCREEN_WIDTH, SCREEN_HEIGHT - header.bounds.size.height)];
+    if (allEmployee) {
+        
+        [tblEmployee setFrame:CGRectMake(0, header.bounds.size.height + searchBar.bounds.size.height, SCREEN_WIDTH, SCREEN_HEIGHT - header.bounds.size.height - searchBar.bounds.size.height)];
+    } else {
+        
+        [tblEmployee setFrame:CGRectMake(0, header.bounds.size.height, SCREEN_WIDTH, SCREEN_HEIGHT - header.bounds.size.height)];
+    }
     
     [tblEmployee registerNib:[UINib nibWithNibName:NSStringFromClass([TableViewCell class]) bundle:nil] forCellReuseIdentifier:@"Cell"];
     
@@ -126,8 +139,14 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
     if(allEmployee) {
-        
-        return [employeeList count];
+        if(isFiltered) {
+            
+            return filteredEmployees.count;
+        } else {
+            
+             return [employeeList count];
+        }
+       
     } else {
         
         return [employeeListInDepartment count];
@@ -141,7 +160,14 @@
     //------------
     if(allEmployee) {
         
-        [cell setCellWithEmployee:[employeeList objectAtIndex:indexPath.row] atIndex:indexPath];
+        
+        if(isFiltered) {
+            
+            [cell setCellWithEmployee:[filteredEmployees objectAtIndex:indexPath.row] atIndex:indexPath];
+        } else {
+            
+            [cell setCellWithEmployee:[employeeList objectAtIndex:indexPath.row] atIndex:indexPath];
+        }
     } else {
         
         [cell setCellWithEmployee:[employeeListInDepartment objectAtIndex:indexPath.row] atIndex:indexPath];
@@ -162,20 +188,40 @@
 - (void)tableViewCellEditAtIndex:(NSIndexPath *)index {
     
     if (allEmployee) {
-        // Sua Employee trong man hinh all Employee
-        if ([[ContentManager shareManager] editEmployee:[employeeList objectAtIndex:index.row]]) {
+        if (isFiltered) {
             
-            AddViewController *addView = [[AddViewController alloc] init];
+            // Sua Employee trong man hinh all Search Employee
+            if ([[ContentManager shareManager] editEmployee:[filteredEmployees objectAtIndex:index.row]]) {
+                
+                AddViewController *addView = [[AddViewController alloc] init];
+                
+                addView.isEmployee = YES;
+                
+                addView.editFlag = YES;
+                
+                addView.delegate = self;
+                
+                addView.inputEmployee = [filteredEmployees objectAtIndex:index.row];
+                
+                [self.navigationController pushViewController:addView animated:YES];
+            }
+        } else {
             
-            addView.isEmployee = YES;
-            
-            addView.editFlag = YES;
-            
-            addView.delegate = self;
-            
-            addView.inputEmployee = [employeeList objectAtIndex:index.row];
-            
-            [self.navigationController pushViewController:addView animated:YES];
+            // Sua Employee trong man hinh all Employee
+            if ([[ContentManager shareManager] editEmployee:[employeeList objectAtIndex:index.row]]) {
+                
+                AddViewController *addView = [[AddViewController alloc] init];
+                
+                addView.isEmployee = YES;
+                
+                addView.editFlag = YES;
+                
+                addView.delegate = self;
+                
+                addView.inputEmployee = [employeeList objectAtIndex:index.row];
+                
+                [self.navigationController pushViewController:addView animated:YES];
+            }
         }
     } else {
         // Sua Employee trong Department
@@ -199,27 +245,49 @@
 - (void)tableViewCellDeleteAtIndex:(NSIndexPath *)index {
     
     if(allEmployee) {
-        // Xoa Employee
-        if ([[ContentManager shareManager] deleteEmployee:[employeeList objectAtIndex:index.row]]) {
+        if(isFiltered){
+            if ([[ContentManager shareManager] deleteEmployee:[filteredEmployees objectAtIndex:index.row]]) {
+                
+                [filteredEmployees removeObjectAtIndex:index.row];
+                
+                [tblEmployee beginUpdates];
+                
+                [tblEmployee deleteRowsAtIndexPaths:@[index] withRowAnimation:UITableViewRowAnimationLeft];
+                
+                [tblEmployee endUpdates];
+                
+                [tblEmployee reloadData];
+            }
+            if ([[ContentManager shareManager] deleteDepartmentEmployee:[departmentEmployeeForSearch objectAtIndex:index.row]]) {
 
-            [employeeList removeObjectAtIndex:index.row];
+                [departmentEmployeeForSearch removeObjectAtIndex:index.row];
 
-            [tblEmployee beginUpdates];
-
-            [tblEmployee deleteRowsAtIndexPaths:@[index] withRowAnimation:UITableViewRowAnimationLeft];
-
-            [tblEmployee endUpdates];
-
-            [tblEmployee reloadData];
+                [tblEmployee reloadData];
+            }
+        } else {
+            // Xoa Employee
+            if ([[ContentManager shareManager] deleteEmployee:[employeeList objectAtIndex:index.row]]) {
+                
+                [employeeList removeObjectAtIndex:index.row];
+                
+                [tblEmployee beginUpdates];
+                
+                [tblEmployee deleteRowsAtIndexPaths:@[index] withRowAnimation:UITableViewRowAnimationLeft];
+                
+                [tblEmployee endUpdates];
+                
+                [tblEmployee reloadData];
+            }
+            // Xoa DepartmentEmployee
+            [self getAllDepartmentEmployee];
+            if ([[ContentManager shareManager] deleteDepartmentEmployee:[allDepartmentEmployeeList objectAtIndex:index.row]]) {
+                
+                [allDepartmentEmployeeList removeObjectAtIndex:index.row];
+                
+                [tblEmployee reloadData];
+            }
         }
-         // Xoa DepartmentEmployee
-        [self getAllDepartmentEmployee];
-        if ([[ContentManager shareManager] deleteDepartmentEmployee:[allDepartmentEmployeeList objectAtIndex:index.row]]) {
-            
-            [allDepartmentEmployeeList removeObjectAtIndex:index.row];
-
-            [tblEmployee reloadData];
-        }
+        
     } else {
         // Xoa Employee
         if ([[ContentManager shareManager] deleteEmployee:[employeeListInDepartment objectAtIndex:index.row]]) {
@@ -244,7 +312,7 @@
     }
 }
 
-#pragma HomeView delegate
+#pragma mark - HomeView's delegate
 - (void)homeViewPushRightActionDepartment {
     
     DepartmentViewController *departmentViewController = [[DepartmentViewController alloc] init];
@@ -284,4 +352,45 @@
         employeeViewController.allEmployeeTitle = YES;
     }
 }
+
+#pragma mark - Search's delegate
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+    
+    [self getAllEmployee];
+    
+    if (searchText.length == 0) {
+        
+        isFiltered = false;
+    } else {
+        isFiltered = true;
+    
+        filteredEmployees = [[NSMutableArray alloc] init];
+        
+        Employee *employee = [[Employee alloc] init];
+        
+        for (employee in employeeList) {
+            
+            NSString *employeeName = [[NSString alloc] init];
+            
+            employeeName = employee.employeeName;
+            
+            NSRange nameRange = [employeeName rangeOfString:searchText options:NSCaseInsensitiveSearch];
+            
+            if (nameRange.location != NSNotFound) {
+                
+                [filteredEmployees addObject:employee];
+            }
+        }
+    }
+    [self getDepartmentEmployeeForSearch];
+    [self.tblEmployee reloadData];
+}
+
+- (void)getDepartmentEmployeeForSearch{
+
+    departmentEmployeeForSearch = [[NSMutableArray alloc] init];
+
+    [departmentEmployeeForSearch addObjectsFromArray:[[ContentManager shareManager] getDepartmentEmployeeForSearch:filteredEmployees]];
+}
+
 @end

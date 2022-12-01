@@ -11,13 +11,12 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @protocol HeaderViewDelegate <NSObject>
-
 @optional
 - (void)headerViewPushRightAction;
 
 @end
 
-@interface HeaderView : UIView
+@interface HeaderView : UIView <UISearchBarDelegate>
 
 @property (nonatomic, weak) IBOutlet UILabel *lblTitle;
 @property (nonatomic, weak) IBOutlet UIButton *btnBack;

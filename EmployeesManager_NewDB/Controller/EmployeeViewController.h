@@ -16,24 +16,30 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface EmployeeViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, HeaderViewDelegate, AddViewControllerDelegate, TableViewCellDelegate> {
+@interface EmployeeViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, HeaderViewDelegate, AddViewControllerDelegate, TableViewCellDelegate, UISearchBarDelegate> {
 
     //----------
     NSMutableArray *employeeList;
     NSMutableArray *employeeListInDepartment;
     NSMutableArray *departmentEmployeeList;
     NSMutableArray *allDepartmentEmployeeList;
+    
+    NSMutableArray *filteredEmployees;
+    NSMutableArray *departmentEmployeeForSearch;
     //----------
 }
 
 @property (nonatomic, weak) IBOutlet UIView *containView;
 @property (nonatomic, weak) IBOutlet UITableView *tblEmployee;
+@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 
 //---------------
 @property (nonatomic, weak) Department *inputDepartment;
 
 @property (nonatomic, assign) BOOL allEmployee;
 @property (nonatomic, assign) BOOL allEmployeeTitle;
+
+@property (nonatomic, assign) BOOL isFiltered;
 //---------------
 @end
 
