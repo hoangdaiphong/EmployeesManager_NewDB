@@ -80,7 +80,7 @@
     
     [tblEmployee reloadData];
 }
-//---------------
+
 // Lay toan bo danh sach Employee
 - (void) getAllEmployee {
     
@@ -111,7 +111,7 @@
     
     [employeeListInDepartment addObjectsFromArray:[[ContentManager shareManager] getEmployeeInDepartment:departmentEmployeeList]];
 }
-//-------------
+
 #pragma mark - HeaderView's Delegate
 - (void)headerViewPushRightAction {
     
@@ -157,7 +157,6 @@
     
     TableViewCell *cell = [self.tblEmployee dequeueReusableCellWithIdentifier:@"Cell"];
     
-    //------------
     if(allEmployee) {
         
         
@@ -172,11 +171,18 @@
         
         [cell setCellWithEmployee:[employeeListInDepartment objectAtIndex:indexPath.row] atIndex:indexPath];
     }
-    //------------
     
     cell.delegate = self;
     
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if ( indexPath.row % 2 == 0 )
+        cell.backgroundColor = [UIColor whiteColor];
+    else
+        cell.backgroundColor = [UIColor colorWithRed:178/255.f green:14/255.f blue:12/255.f alpha:0.05];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {

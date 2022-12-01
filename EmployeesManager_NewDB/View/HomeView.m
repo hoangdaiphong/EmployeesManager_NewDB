@@ -27,7 +27,7 @@
     
     [super awakeFromNib];
     
-    [self setBackgroundColor:[UIColor whiteColor]];
+    [self setBackgroundColor:[UIColor colorWithRed:178/255.f green:14/255.f blue:12/255.f alpha:0.1]];
 }
 
 - (void)setHomeView:(BOOL)hideHome hideDepartment:(BOOL)hideDepartment hideEmployee:(BOOL)hideEmployee {

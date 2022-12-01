@@ -65,14 +65,14 @@
     departmentList = [[NSMutableArray alloc] init];
     
     [departmentList addObjectsFromArray:[[ContentManager shareManager] getAllDepartment]];
-    //--------------
+    
     // Lay danh sach employee trong Department va Lay danh sach departmentEmployee trung DepartmentID
     [self getEmployeeListInDepartment];
     
     [tblDepartment reloadData];
 }
 
-//---------------
+
 // Lay danh sach departmentEmployee trung DepartmentID
 - (void)getEmployeeDepartment {
     
@@ -82,6 +82,7 @@
     
     NSLog(@"%@", inputDepartment);
 }
+
 // Lay danh sach employee trong Department
 - (void)getEmployeeListInDepartment {
     
@@ -91,7 +92,7 @@
     
     [employeeListInDepartment addObjectsFromArray:[[ContentManager shareManager] getEmployeeInDepartment:departmentEmployeeList]];
 }
-//-------------
+
 
 #pragma mark - TableView's Delegate
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -116,11 +117,17 @@
     
     EmployeeViewController *employeeView = [[EmployeeViewController alloc] init];
     
-    //-----------------
     employeeView.inputDepartment = [departmentList objectAtIndex:indexPath.row];
-    //-----------------
     
     [self.navigationController pushViewController:employeeView animated:YES];
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if ( indexPath.row % 2 == 0 )
+        cell.backgroundColor = [UIColor colorWithRed:178/255.f green:14/255.f blue:12/255.f alpha:0.05];
+    else
+        cell.backgroundColor = [UIColor whiteColor];
 }
 
 #pragma mark - HeaderView's Delegate
@@ -146,7 +153,6 @@
 
 - (void)tableViewCellDeleteAtIndex:(NSIndexPath *)index {
     
-    //-------------
     inputDepartment = [departmentList objectAtIndex:index.row];
     // Xoa employeesList
     [self getEmployeeListInDepartment];
@@ -169,7 +175,7 @@
                 [departmentEmployeeList removeObjectAtIndex:(i - 1)];
             }
         }
-    //-------------
+
     // Xoa Department
     if ([[ContentManager shareManager] deleteDepartment:[departmentList objectAtIndex:index.row]]) {
         
