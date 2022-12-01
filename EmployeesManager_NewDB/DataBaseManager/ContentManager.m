@@ -261,6 +261,23 @@
     return list;
 }
 
+- (NSArray *)searchEmployee:(NSString *)employeeName {
+    
+    NSManagedObjectContext *context = [self getCurrentContext];
+    
+    NSFetchRequest *request = [Employee fetchRequest];
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"employeeName LIKE %@", employeeName];
+    
+    [request setPredicate:predicate];
+    
+    NSError *error = nil;
+    
+    NSArray *list = [context executeFetchRequest:request error:&error];
+    
+    return list;
+}
+
 #pragma mark - DepartmentEmployee
 - (BOOL)insertDepartmentEmployee:(NSString *)departmentID {
     

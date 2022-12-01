@@ -33,6 +33,14 @@
     
     [[JSON_Manger parseJSON] parseJSONDepartment];
     [[JSON_Manger parseJSON] parseJSONEmployee];
+    
+//    NSMutableArray *list = [[NSMutableArray alloc] init];
+//    NSString *name = [[NSString alloc] init];
+//    name = @"Hoang Dai Phong";
+//    [list addObjectsFromArray:[[ContentManager shareManager] searchEmployee:name]];
+//    Employee *employee = [[Employee alloc] init];
+//    employee = list[1];
+//    NSLog(@"%lu", (unsigned long)list.count);
 }
 
 - (void)setupView {

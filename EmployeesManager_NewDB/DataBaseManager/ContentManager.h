@@ -44,6 +44,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (NSArray *)getEmployeeInDepartment:(NSArray *)departmentEmployeeList;
 
+- (NSArray *)searchEmployee:(NSString *)employeeName;
+
 #pragma mark - DepartmentEmployee
 - (BOOL)insertDepartmentEmployee:(NSString *)departmentID;
 
