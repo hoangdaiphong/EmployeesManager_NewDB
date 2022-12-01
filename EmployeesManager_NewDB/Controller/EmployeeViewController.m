@@ -273,12 +273,15 @@
 
 - (void)homeViewPushRightActionEmployee {
     
-    EmployeeViewController *employeeViewController = [[EmployeeViewController alloc] init];
-    
-    [self.navigationController pushViewController:employeeViewController animated:YES];
-    
-    employeeViewController.allEmployee = YES;
-    
-    employeeViewController.allEmployeeTitle = YES;
+    if (!allEmployee) {
+        
+        EmployeeViewController *employeeViewController = [[EmployeeViewController alloc] init];
+        
+        [self.navigationController pushViewController:employeeViewController animated:YES];
+        
+        employeeViewController.allEmployee = YES;
+        
+        employeeViewController.allEmployeeTitle = YES;
+    }
 }
 @end
