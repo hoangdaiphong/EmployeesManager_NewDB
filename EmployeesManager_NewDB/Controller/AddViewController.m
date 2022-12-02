@@ -33,6 +33,7 @@
 - (void)setupView {
     
     [containView setFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+    containView.backgroundColor = [UIColor colorWithRed:178/255.f green:14/255.f blue:12/255.f alpha:0.05];
     
     HeaderView *header = [[HeaderView alloc] init];
     
@@ -63,7 +64,7 @@
     
     [containView addSubview:header];
 }
-//-------------------------
+
 - (void)getData {
     
     departmentList = [[NSMutableArray alloc] init];
@@ -99,9 +100,7 @@
             if (isEmployee) {
                 
                 success = [[ContentManager shareManager] insertEmployeeWithName:txtName.text];
-                //---------------------
                 // Them DepartmentEmployee
-                
                     [self getData];
                     
                     Employee *employee = [[Employee alloc] init];
@@ -109,7 +108,6 @@
                     employee = employeeList[employeeList.count - 1];
                 
                     success = [[ContentManager shareManager] insertDepartmentEmployee:inputDepartment.departmentID employeeID:employee.employeeID];
-                //---------------------
             } else {
                 
                 success = [[ContentManager shareManager] insertDepartmentWithName:txtName.text];

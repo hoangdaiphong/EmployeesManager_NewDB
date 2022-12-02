@@ -11,7 +11,6 @@
 
 @implementation Department
 
-//--------------------
 - (void)awakeFromInsert {
     
     [super awakeFromInsert];

@@ -11,7 +11,6 @@
 
 @implementation Employee
 
-//--------------------
 - (void)awakeFromInsert {
     [super awakeFromInsert];
     
@@ -21,6 +20,5 @@
     
     employeeID += 1;
 }
-//--------------------
 @end
 

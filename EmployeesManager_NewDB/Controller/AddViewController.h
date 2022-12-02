@@ -21,11 +21,9 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 @interface AddViewController : UIViewController <HeaderViewDelegate> {
-    //-----------------
+
     NSMutableArray *departmentList;
-    
     NSMutableArray *employeeList;
-    //-----------------
 }
 
 @property (nonatomic, weak) IBOutlet UIView *containView;
