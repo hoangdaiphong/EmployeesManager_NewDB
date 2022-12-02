@@ -36,8 +36,8 @@
     
     isFiltered = NO;
     searchBar.delegate = self;
+    [searchBar setFrame:CGRectMake(0, header.bounds.size.height, searchBar.bounds.size.width, searchBar.bounds.size.height)];
     [searchBar setHidden:YES];
-    
     if (allEmployee) {
         
         [searchBar setHidden:NO];
@@ -46,28 +46,25 @@
         
         [header setHeaderWithTitle:inputDepartment.departmentName hideBack:YES hideAdd:NO inController:self];
     }
-    
     header.delegate = self;
-    
     [self.view addSubview:header];
-    
-    if (allEmployee) {
-        
-        [tblEmployee setFrame:CGRectMake(0, header.bounds.size.height + searchBar.bounds.size.height, SCREEN_WIDTH, SCREEN_HEIGHT - header.bounds.size.height - searchBar.bounds.size.height)];
-    } else {
-        
-        [tblEmployee setFrame:CGRectMake(0, header.bounds.size.height, SCREEN_WIDTH, SCREEN_HEIGHT - header.bounds.size.height)];
-    }
-    
-    [tblEmployee registerNib:[UINib nibWithNibName:NSStringFromClass([TableViewCell class]) bundle:nil] forCellReuseIdentifier:@"Cell"];
-    
-    tblEmployee.dataSource = self;
-    tblEmployee.delegate = self;
     
     HomeView *homeView = [[HomeView alloc] init];
     [homeView setHomeView:YES hideDepartment:YES hideEmployee:NO];
     homeView.delegate = self;
     [containView addSubview:homeView];
+    
+    if (allEmployee) {
+        
+        [tblEmployee setFrame:CGRectMake(0, header.bounds.size.height + searchBar.bounds.size.height, SCREEN_WIDTH, SCREEN_HEIGHT - header.bounds.size.height - searchBar.bounds.size.height - homeView.bounds.size.height)];
+    } else {
+        
+        [tblEmployee setFrame:CGRectMake(0, header.bounds.size.height, SCREEN_WIDTH, SCREEN_HEIGHT - header.bounds.size.height - homeView.bounds.size.height)];
+    }
+    
+    [tblEmployee registerNib:[UINib nibWithNibName:NSStringFromClass([TableViewCell class]) bundle:nil] forCellReuseIdentifier:@"Cell"];
+    tblEmployee.dataSource = self;
+    tblEmployee.delegate = self;
     
     [self getData];
 }

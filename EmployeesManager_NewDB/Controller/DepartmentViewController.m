@@ -16,10 +16,8 @@
 
 @synthesize tblDepartment;
 @synthesize containView;
-
-//-------------
 @synthesize inputDepartment;
-//-------------
+
 
 - (void)viewWillAppear:(BOOL)animated {
     
@@ -44,23 +42,22 @@
     header.delegate = self;
     [containView addSubview:header];
     
-    [tblDepartment setFrame:CGRectMake(0, 100, SCREEN_WIDTH, SCREEN_HEIGHT - 100)];
+    HomeView *homeView = [[HomeView alloc] init];
+    [homeView setHomeView:YES hideDepartment:NO hideEmployee:YES];
+    homeView.delegate = self;
+    [containView addSubview:homeView];
+    
+    [tblDepartment setFrame:CGRectMake(0, header.bounds.size.height, SCREEN_WIDTH, SCREEN_HEIGHT - header.bounds.size.height - homeView.bounds.size.height)];
     
     [tblDepartment registerNib:[UINib nibWithNibName:NSStringFromClass([TableViewCell class]) bundle:nil] forCellReuseIdentifier:@"Cell"];
     
     tblDepartment.dataSource = self;
     tblDepartment.delegate = self;
     
-    HomeView *homeView = [[HomeView alloc] init];
-    [homeView setHomeView:YES hideDepartment:NO hideEmployee:YES];
-    homeView.delegate = self;
-    [containView addSubview:homeView];
-    
     [self getData];
 }
 
 - (void)getData {
-    
     // Lay danh sach department
     departmentList = [[NSMutableArray alloc] init];
     
@@ -72,15 +69,12 @@
     [tblDepartment reloadData];
 }
 
-
 // Lay danh sach departmentEmployee trung DepartmentID
 - (void)getEmployeeDepartment {
     
     departmentEmployeeList = [[NSMutableArray alloc] init];
     
     [departmentEmployeeList addObjectsFromArray:[[ContentManager shareManager] getDepartmentEmployee:inputDepartment.departmentID]];
-    
-    NSLog(@"%@", inputDepartment);
 }
 
 // Lay danh sach employee trong Department
@@ -150,7 +144,6 @@
 }
 
 #pragma mark - TableViewCell's Delegate
-
 - (void)tableViewCellDeleteAtIndex:(NSIndexPath *)index {
     
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"削除の確認" message:@"本当に削除してもいいですか？" preferredStyle:UIAlertControllerStyleAlert];
@@ -215,7 +208,6 @@
 }
 
 #pragma HomeView delegate
-
 - (void)homeViewPushRightActionEmployee {
     
     EmployeeViewController *employeeViewController = [[EmployeeViewController alloc] init];
@@ -239,5 +231,4 @@
     
     [self.navigationController popViewControllerAnimated:YES];
 }
-
 @end
