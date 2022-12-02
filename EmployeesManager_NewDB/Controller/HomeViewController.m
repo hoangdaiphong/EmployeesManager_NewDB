@@ -38,8 +38,9 @@
 - (void)setupView {
     
     [containView setFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
-    
-    UIImageView *myImage = [[UIImageView alloc] initWithFrame:CGRectMake(-20, 52, 405, 636)];
+    [containView setBackgroundColor:[UIColor colorWithRed:18/255.f green:14/255.f blue:152/255.f alpha:0.1]];
+
+    UIImageView *myImage = [[UIImageView alloc] initWithFrame:CGRectMake(-20, 122, 405, 506)];
     myImage.image = [UIImage imageNamed:@"company.jpg"];
     [containView addSubview:myImage];
 
