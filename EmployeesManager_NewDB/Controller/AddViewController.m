@@ -26,6 +26,8 @@
 @synthesize txtDepartmentName;
 @synthesize pickerView;
 @synthesize allEmployee;
+@synthesize lblEmploye;
+@synthesize lblDepartment;
 
 - (void)viewDidLoad {
     
@@ -59,25 +61,39 @@
         if (isEmployee) {
             
             [header setHeaderWithTitle:@"社員を追加" hideBack:NO hideAdd:YES inController:self];
+            
+            txtName.placeholder = @"社員名";
         } else {
             
             [header setHeaderWithTitle:@"部署を追加" hideBack:NO hideAdd:YES inController:self];
+            
+            txtName.placeholder = @"部署名";
         }
     }
     header.delegate = self;
+    [containView addSubview:header];
     
+    [lblDepartment setHidden:YES];
+    [lblEmploye setHidden:YES];
     [txtDepartmentName setHidden:YES];
     [pickerView setHidden:YES];
+    
     if(allEmployee) {
+        
         [txtDepartmentName setHidden: NO];
         [pickerView setHidden: NO];
-        txtDepartmentName.placeholder = @"部署を選んでください";
+        
+        [lblDepartment setHidden:NO];
+        [lblEmploye setHidden:NO];
+        txtDepartmentName.placeholder = @"部署名";
+        
+        [txtDepartmentName setFrame:CGRectMake(48, 223, 278, 30)];
+        [pickerView setFrame:CGRectMake(40, 246, 278, 216)];
+        [btnSave setFrame:CGRectMake(156, 453, 62, 65)];
+        
         pickerView.dataSource = self;
         pickerView.delegate = self;
     }
-    
-    
-    [containView addSubview:header];
 }
 
 - (void)getData {

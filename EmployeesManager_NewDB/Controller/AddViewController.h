@@ -30,6 +30,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, weak) IBOutlet UIView *containView;
 @property (nonatomic, weak) IBOutlet UITextField *txtName;
 @property (nonatomic, weak) IBOutlet UITextField *txtDepartmentName;
+
+@property (nonatomic, weak) IBOutlet UILabel *lblEmploye;
+@property (nonatomic, weak) IBOutlet UILabel *lblDepartment;
+
 @property (nonatomic, weak) IBOutlet UIPickerView *pickerView;
 @property (nonatomic, weak) IBOutlet UIButton *btnSave;
 
