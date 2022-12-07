@@ -17,8 +17,8 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     
-    NSArray<NSString *> *dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentationDirectory, NSUserDomainMask, YES);
-    NSLog(@"%@", dirPaths);
+//    NSArray<NSString *> *dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentationDirectory, NSUserDomainMask, YES);
+//    NSLog(@"%@", dirPaths);
     
     [super viewWillAppear:animated];
     

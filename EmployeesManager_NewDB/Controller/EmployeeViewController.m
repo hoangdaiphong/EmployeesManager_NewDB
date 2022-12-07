@@ -41,10 +41,10 @@
     if (allEmployee) {
         
         [searchBar setHidden:NO];
-        [header setHeaderWithTitle:@"全社員" hideBack:YES hideAdd:YES inController:self];
+        [header setHeaderWithTitle:@"全社員" hideBack:YES hideAdd:NO inController:self];
     } else {
         
-        [header setHeaderWithTitle:inputDepartment.departmentName hideBack:YES hideAdd:NO inController:self];
+        [header setHeaderWithTitle:inputDepartment.departmentName hideBack:NO hideAdd:NO inController:self];
     }
     header.delegate = self;
     [self.view addSubview:header];
@@ -120,6 +120,11 @@
     
     addView.inputDepartment = inputDepartment;
     
+    if(allEmployee){
+ 
+        addView.allEmployee = YES;
+    }
+    
     [self.navigationController pushViewController:addView animated:YES];
 }
 
@@ -134,7 +139,7 @@
 
 #pragma mark - TableView's Delegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    
+    NSLog(@"%lu", (unsigned long)employeeListInDepartment.count);
     if(allEmployee) {
         if(isFiltered) {
             
@@ -146,6 +151,20 @@
        
     } else {
         
+        //Neu khong co employee thi se hien ra man hinh thong bao khong co gi
+        UIImageView *myImage = [[UIImageView alloc] initWithFrame:CGRectMake(-20, 122, 405, 506)];
+        myImage.image = [UIImage imageNamed:@"noData.png"];
+        [containView addSubview:myImage];
+        if(employeeListInDepartment.count == 0){
+            
+            [tblEmployee setHidden: YES];
+
+            
+        } else {
+            myImage.image = nil;
+            [tblEmployee setHidden: NO];
+        }
+        
         return [employeeListInDepartment count];
     }
 }
@@ -156,7 +175,6 @@
     
     if(allEmployee) {
         
-        
         if(isFiltered) {
             
             [cell setCellWithEmployee:[filteredEmployees objectAtIndex:indexPath.row] atIndex:indexPath];
@@ -165,7 +183,7 @@
             [cell setCellWithEmployee:[employeeList objectAtIndex:indexPath.row] atIndex:indexPath];
         }
     } else {
-        
+      
         [cell setCellWithEmployee:[employeeListInDepartment objectAtIndex:indexPath.row] atIndex:indexPath];
     }
     
@@ -177,8 +195,10 @@
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     
     if ( indexPath.row % 2 == 0 )
+        
         cell.backgroundColor = [UIColor whiteColor];
     else
+        
         cell.backgroundColor = [UIColor colorWithRed:178/255.f green:14/255.f blue:12/255.f alpha:0.05];
 }
 
@@ -192,7 +212,6 @@
     
     if (allEmployee) {
         if (isFiltered) {
-            
             // Sua Employee trong man hinh all Search Employee
             if ([[ContentManager shareManager] editEmployee:[filteredEmployees objectAtIndex:index.row]]) {
                 
@@ -209,7 +228,6 @@
                 [self.navigationController pushViewController:addView animated:YES];
             }
         } else {
-            
             // Sua Employee trong man hinh all Employee
             if ([[ContentManager shareManager] editEmployee:[employeeList objectAtIndex:index.row]]) {
                 
@@ -250,8 +268,13 @@
     
     UIAlertAction *actionDelete = [UIAlertAction actionWithTitle:@"はい" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         
+        [self getAllEmployee];
+        [self getAllDepartmentEmployee];
+
         if(self->allEmployee) {
+            
             if(self->isFiltered){
+                // Xoa Employee
                 if ([[ContentManager shareManager] deleteEmployee:[self->filteredEmployees objectAtIndex:index.row]]) {
                     
                     [self->filteredEmployees removeObjectAtIndex:index.row];
@@ -264,6 +287,7 @@
                     
                     [self->tblEmployee reloadData];
                 }
+                // Xoa DepartmentEmployee
                 if ([[ContentManager shareManager] deleteDepartmentEmployee:[self->departmentEmployeeForSearch objectAtIndex:index.row]]) {
                     
                     [self->departmentEmployeeForSearch removeObjectAtIndex:index.row];
@@ -285,7 +309,6 @@
                     [self->tblEmployee reloadData];
                 }
                 // Xoa DepartmentEmployee
-                [self getAllDepartmentEmployee];
                 if ([[ContentManager shareManager] deleteDepartmentEmployee:[self->allDepartmentEmployeeList objectAtIndex:index.row]]) {
                     
                     [self->allDepartmentEmployeeList removeObjectAtIndex:index.row];
@@ -405,5 +428,4 @@
 
     [departmentEmployeeForSearch addObjectsFromArray:[[ContentManager shareManager] getDepartmentEmployeeForSearch:filteredEmployees]];
 }
-
 @end

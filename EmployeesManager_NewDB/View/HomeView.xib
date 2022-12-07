@@ -63,7 +63,7 @@
                 <outlet property="imgEmployeeLine" destination="vU0-X6-U3w" id="QzZ-aT-5fM"/>
                 <outlet property="imgHomeLine" destination="qPo-UC-QGP" id="Az5-GZ-pNc"/>
             </connections>
-            <point key="canvasLocation" x="725.60000000000002" y="-123.39901477832512"/>
+            <point key="canvasLocation" x="-151" y="48"/>
         </view>
     </objects>
     <resources>

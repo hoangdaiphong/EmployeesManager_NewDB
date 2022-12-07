@@ -7,6 +7,7 @@
 //
 
 #import "AddViewController.h"
+#import "EmployeeViewController.h"
 
 @interface AddViewController ()
 
@@ -22,6 +23,9 @@
 @synthesize btnSave;
 @synthesize isEmployee;
 @synthesize inputEmployee;
+@synthesize txtDepartmentName;
+@synthesize pickerView;
+@synthesize allEmployee;
 
 - (void)viewDidLoad {
     
@@ -62,6 +66,17 @@
     }
     header.delegate = self;
     
+    [txtDepartmentName setHidden:YES];
+    [pickerView setHidden:YES];
+    if(allEmployee) {
+        [txtDepartmentName setHidden: NO];
+        [pickerView setHidden: NO];
+        txtDepartmentName.placeholder = @"部署を選んでください";
+        pickerView.dataSource = self;
+        pickerView.delegate = self;
+    }
+    
+    
     [containView addSubview:header];
 }
 
@@ -98,16 +113,46 @@
         } else {
             
             if (isEmployee) {
-                
-                success = [[ContentManager shareManager] insertEmployeeWithName:txtName.text];
-                // Them DepartmentEmployee
+                //Neu la danh sach tat ca Employee
+                if(allEmployee) {
+                    // Nếu chọn Department
+                    if ([[txtDepartmentName text] length] > 0) {
+                        
+                        success = [[ContentManager shareManager] insertEmployeeWithName:txtName.text];
+                        // Them DepartmentEmployee
+                        [self getData];
+                        
+                        Employee *employee = [[Employee alloc] init];
+                        
+                        employee = employeeList[employeeList.count - 1];
+                        
+                        success = [[ContentManager shareManager] insertDepartmentEmployee:inputDepartment.departmentID employeeID:employee.employeeID];
+                    } else { // Nếu không chọn department
+                        
+                        success = [[ContentManager shareManager] insertEmployeeWithName:txtName.text];
+                        // Them DepartmentEmployee
+                        [self getData];
+                        
+                        Employee *employee = [[Employee alloc] init];
+                        
+                        employee = employeeList[employeeList.count - 1];
+                        
+                        success = [[ContentManager shareManager] insertDepartmentEmployee:@"dep000" employeeID:employee.employeeID];
+                    }
+                } else {
+                    
+                    // Neu la danh sach Employee trong department
+                    success = [[ContentManager shareManager] insertEmployeeWithName:txtName.text];
+                    // Them DepartmentEmployee
                     [self getData];
                     
                     Employee *employee = [[Employee alloc] init];
                     
                     employee = employeeList[employeeList.count - 1];
-                
+                    
                     success = [[ContentManager shareManager] insertDepartmentEmployee:inputDepartment.departmentID employeeID:employee.employeeID];
+                }
+                
             } else {
                 
                 success = [[ContentManager shareManager] insertDepartmentWithName:txtName.text];
@@ -120,5 +165,40 @@
         }
         [self.navigationController popViewControllerAnimated:YES];
     }
+}
+
+#pragma mark - pickerView's delegate
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
+    
+    return 1;
+}
+
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
+    
+    [self getData];
+    
+    return departmentList.count;
+}
+
+- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
+    
+    Department *department = [[Department alloc] init];
+    
+    department = departmentList[row];
+    
+    return department.departmentName;
+}
+
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
+    
+    Department *department = [[Department alloc] init];
+    
+    department = departmentList[row];
+    
+    inputDepartment = department;
+    
+    txtDepartmentName.text = department.departmentName;
+    
+    [txtDepartmentName resignFirstResponder];
 }
 @end

@@ -29,6 +29,10 @@
     
     [self.window makeKeyAndVisible];
     
+    //-------------------
+//    UITabBarController *tabBar  = (UITabBarController *) self.window.rootViewController;
+//    tabBar.selectedViewController = [tabBar.childViewControllers objectAtIndex:1];
+    
     return YES;
 }
 

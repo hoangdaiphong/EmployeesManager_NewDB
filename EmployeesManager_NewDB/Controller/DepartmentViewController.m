@@ -119,8 +119,10 @@
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     
     if ( indexPath.row % 2 == 0 )
+        
         cell.backgroundColor = [UIColor colorWithRed:178/255.f green:14/255.f blue:12/255.f alpha:0.05];
     else
+        
         cell.backgroundColor = [UIColor whiteColor];
 }
 
@@ -215,7 +217,6 @@
     [self.navigationController pushViewController:employeeViewController animated:YES];
 
     employeeViewController.allEmployee = YES;
-    
     employeeViewController.allEmployeeTitle = YES;
 }
 

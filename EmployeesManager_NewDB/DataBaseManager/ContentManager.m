@@ -363,7 +363,7 @@
     
     NSFetchRequest *request = [DepartmentEmployee fetchRequest];
     
-    NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"departmentID" ascending:YES];
+    NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"employeeID" ascending:YES];
     
     request.sortDescriptors = @[sort];
     
@@ -395,7 +395,7 @@
     
     NSFetchRequest *request = [DepartmentEmployee fetchRequest];
     
-    NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"departmentID" ascending:YES];
+    NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"employeeID" ascending:YES];
     
     request.sortDescriptors = @[sort];
     
@@ -442,7 +442,7 @@
     
     NSFetchRequest *request = [DepartmentEmployee fetchRequest];
     
-    NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"departmentID" ascending:YES];
+    NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"employeeID" ascending:YES];
     
     request.sortDescriptors = @[sort];
     

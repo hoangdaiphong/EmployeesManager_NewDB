@@ -11,6 +11,7 @@
 #import "HeaderView.h"
 #import "Department+CoreDataClass.h"
 
+
 NS_ASSUME_NONNULL_BEGIN
 
 @protocol AddViewControllerDelegate <NSObject>
@@ -20,7 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-@interface AddViewController : UIViewController <HeaderViewDelegate> {
+@interface AddViewController : UIViewController <HeaderViewDelegate, UIPickerViewDataSource, UIPickerViewDelegate> {
 
     NSMutableArray *departmentList;
     NSMutableArray *employeeList;
@@ -28,10 +29,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, weak) IBOutlet UIView *containView;
 @property (nonatomic, weak) IBOutlet UITextField *txtName;
+@property (nonatomic, weak) IBOutlet UITextField *txtDepartmentName;
+@property (nonatomic, weak) IBOutlet UIPickerView *pickerView;
 @property (nonatomic, weak) IBOutlet UIButton *btnSave;
 
 @property (nonatomic, assign) BOOL editFlag;
 @property (nonatomic, assign) BOOL isEmployee;
+@property (nonatomic, assign) BOOL allEmployee;
 
 @property (nonatomic, weak) Department *inputDepartment;
 @property (nonatomic, weak) Employee *inputEmployee;
