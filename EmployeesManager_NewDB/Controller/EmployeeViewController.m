@@ -141,7 +141,6 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    NSLog(@"%lu", (unsigned long)employeeListInDepartment.count);
     if(allEmployee) {
         if(isFiltered) {
             
@@ -215,6 +214,8 @@
 #pragma mark - TableViewCell's Delegate
 - (void)tableViewCellEditAtIndex:(NSIndexPath *)index {
     
+    [self getAllDepartmentEmployee];
+    
     if (allEmployee) {
         if (isFiltered) {
             // Sua Employee trong man hinh all Search Employee
@@ -223,12 +224,13 @@
                 AddViewController *addView = [[AddViewController alloc] init];
                 
                 addView.isEmployee = YES;
-                
                 addView.editFlag = YES;
-                
                 addView.delegate = self;
                 
                 addView.inputEmployee = [filteredEmployees objectAtIndex:index.row];
+                
+                // tim departmentEmployee tuong ung voi employee de thay doi trong AddviewController
+                addView.inputDepartmentEmployee = [allDepartmentEmployeeList objectAtIndex:[[ContentManager shareManager] getOneDepartmentEmployee:addView.inputEmployee]];
                 
                 [self.navigationController pushViewController:addView animated:YES];
             }
@@ -239,12 +241,13 @@
                 AddViewController *addView = [[AddViewController alloc] init];
                 
                 addView.isEmployee = YES;
-                
                 addView.editFlag = YES;
-                
                 addView.delegate = self;
-                
+
                 addView.inputEmployee = [employeeList objectAtIndex:index.row];
+              
+                // tim departmentEmployee tuong ung voi employee de thay doi trong AddviewController
+                addView.inputDepartmentEmployee = [allDepartmentEmployeeList objectAtIndex:[[ContentManager shareManager] getOneDepartmentEmployee:addView.inputEmployee]];
                 
                 [self.navigationController pushViewController:addView animated:YES];
             }
@@ -256,12 +259,13 @@
             AddViewController *addView = [[AddViewController alloc] init];
             
             addView.isEmployee = YES;
-            
             addView.editFlag = YES;
-            
             addView.delegate = self;
             
             addView.inputEmployee = [employeeListInDepartment objectAtIndex:index.row];
+            
+            // tim departmentEmployee tuong ung voi employee de thay doi trong AddviewController
+            addView.inputDepartmentEmployee = [allDepartmentEmployeeList objectAtIndex:[[ContentManager shareManager] getOneDepartmentEmployee:addView.inputEmployee]];
             
             [self.navigationController pushViewController:addView animated:YES];
         }
@@ -433,5 +437,4 @@
 
     [departmentEmployeeForSearch addObjectsFromArray:[[ContentManager shareManager] getDepartmentEmployeeForSearch:filteredEmployees]];
 }
-
 @end

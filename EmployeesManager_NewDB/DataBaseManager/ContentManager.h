@@ -29,6 +29,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (BOOL)editDepartment:(Department *)department;
 
+- (int)getIndexDepartmentInList:(Department *)department;
+
+- (Department *)getOneDepartmentForEmployee:(int)index;
+
 - (NSArray *)getAllDepartment;
 
 #pragma mark - Employee
@@ -54,6 +58,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (BOOL)editDepartmentEmployee:(DepartmentEmployee *)departmentEmployee;
 
 - (BOOL)deleteDepartmentEmployee:(DepartmentEmployee *)departmentEmployee;
+
+- (int)getOneDepartmentEmployee:(Employee *)employee;
 
 - (NSArray *)getDepartmentEmployee:(NSString *)departmentID;
 

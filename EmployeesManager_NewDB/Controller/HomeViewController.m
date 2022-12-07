@@ -20,6 +20,33 @@
 //    NSArray<NSString *> *dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentationDirectory, NSUserDomainMask, YES);
 //    NSLog(@"%@", dirPaths);
     
+    // Them vao database Department none
+    NSMutableArray *listDepartment = [[NSMutableArray alloc] init];
+    
+    [listDepartment addObjectsFromArray:[[ContentManager shareManager] getAllDepartment]];
+    
+    BOOL check = NO;
+    
+    Department *department = [[Department alloc] init];
+    
+    for (int i = 0; i < listDepartment.count; i++) {
+        
+        department = listDepartment[i];
+        
+        NSString *departmentID = department.departmentID;
+        
+        if ([departmentID isEqualToString:@"Adep000"]) {
+            
+            check = YES;
+            break;
+        }
+    }
+    if (!check) {
+        
+        [[ContentManager shareManager] insertDepartment:@"NONE" departmentID:@"Adep000"];
+    }
+    
+    
     [super viewWillAppear:animated];
     
     [self.navigationController setNavigationBarHidden:YES];

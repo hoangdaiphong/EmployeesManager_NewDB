@@ -110,6 +110,87 @@
     }
 }
 
+- (int)getIndexDepartmentInList:(Department *)department {
+    
+    NSManagedObjectContext *context = [self getCurrentContext];
+    
+    NSFetchRequest *request = [Department fetchRequest];
+    
+    NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"departmentID" ascending:YES];
+    
+    request.sortDescriptors = @[sort];
+    
+    NSError *error = nil;
+    
+    NSArray *list = [context executeFetchRequest:request error:&error];
+    
+    Department *department2 = [[Department alloc] init];
+    
+    int i = 0;
+    
+    for (i = 0; i < list.count; i++) {
+        
+        department2 = list[i];
+        
+        NSString *department2ID = [[NSString alloc] init];
+        
+        department2ID = department2.departmentID;
+        
+        if (department2ID == department.departmentID) {
+            
+            break;
+        }
+    }
+    return i;
+}
+
+- (Department *)getOneDepartmentForEmployee:(int)index {
+    
+    NSManagedObjectContext *context = [self getCurrentContext];
+    
+    NSFetchRequest *request = [Department fetchRequest];
+    
+    NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"departmentID" ascending:YES];
+    
+    request.sortDescriptors = @[sort];
+    
+    NSError *error = nil;
+    
+    NSArray *list = [context executeFetchRequest:request error:&error];
+    
+    //-------------
+    NSFetchRequest *request2 = [DepartmentEmployee fetchRequest];
+    
+    NSSortDescriptor *sort2 = [NSSortDescriptor sortDescriptorWithKey:@"employeeID" ascending:YES];
+    
+    request2.sortDescriptors = @[sort2];
+    
+    NSArray *list2 = [context executeFetchRequest:request2 error:&error];
+    
+    DepartmentEmployee *departmentEmployee = [[DepartmentEmployee alloc] init];
+    
+    departmentEmployee = list2[index];
+    
+    //-------------
+    
+    Department *department = [[Department alloc] init];
+    
+    for (int i = 0; i < list.count; i++) {
+        
+        department = list[i];
+        
+        NSString *departmentID = [[NSString alloc] init];
+        
+        departmentID = department.departmentID;
+        
+        if (departmentID == departmentEmployee.departmentID) {
+            
+            break;
+        }
+    }
+    return department;
+}
+
 - (NSArray *)getAllDepartment {
     
     NSManagedObjectContext *context = [self getCurrentContext];
@@ -434,6 +515,40 @@
         }
     }
     return list2;
+}
+
+- (int)getOneDepartmentEmployee:(Employee *)employee {
+    
+    NSManagedObjectContext *context = [self getCurrentContext];
+    
+    NSFetchRequest *request = [DepartmentEmployee fetchRequest];
+    
+    NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"employeeID" ascending:YES];
+    
+    request.sortDescriptors = @[sort];
+    
+    NSError *error = nil;
+    
+    NSArray *list = [context executeFetchRequest:request error:&error];
+    
+    DepartmentEmployee *departmentEmployee = [[DepartmentEmployee alloc] init];
+    
+    int i = 0;
+    
+    for (i = 0; i < list.count; i++) {
+        
+        departmentEmployee = list[i];
+        
+        NSString *employeeID = [[NSString alloc] init];
+        
+        employeeID = departmentEmployee.employeeID;
+        
+        if (employeeID == employee.employeeID) {
+
+            break;
+        }
+    }
+    return i;
 }
 
 - (NSArray *)getAllDepartmentEmployee {

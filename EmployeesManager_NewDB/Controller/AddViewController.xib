@@ -13,6 +13,8 @@
             <connections>
                 <outlet property="btnSave" destination="GnR-3U-X8F" id="fgw-Wf-JAH"/>
                 <outlet property="containView" destination="pYP-DE-uxS" id="SJs-fz-aWJ"/>
+                <outlet property="lblDepartment" destination="WXy-Oj-cLT" id="lD5-xZ-rDD"/>
+                <outlet property="lblEmploye" destination="iYB-Ne-TaX" id="JZX-Ay-T9F"/>
                 <outlet property="pickerView" destination="8kT-WP-DGD" id="8ii-6t-kIb"/>
                 <outlet property="txtDepartmentName" destination="gRl-SG-BJ7" id="gTb-la-wdq"/>
                 <outlet property="txtName" destination="5Pz-mV-tgn" id="gTs-w5-2ZB"/>

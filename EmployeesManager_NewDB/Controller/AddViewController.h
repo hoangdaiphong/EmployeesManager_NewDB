@@ -44,6 +44,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, weak) Department *inputDepartment;
 @property (nonatomic, weak) Employee *inputEmployee;
 
+// sua employee thi cung sua departmentemployee tu employeeViewController truyen vao
+@property (nonatomic, weak) DepartmentEmployee *inputDepartmentEmployee;
+
 @property (nonatomic, weak) id<AddViewControllerDelegate> delegate;
 
 

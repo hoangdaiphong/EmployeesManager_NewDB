@@ -28,12 +28,36 @@
 @synthesize allEmployee;
 @synthesize lblEmploye;
 @synthesize lblDepartment;
+@synthesize inputDepartmentEmployee;
+
+-(void)viewWillAppear:(BOOL)animated {
+    
+    [self setupView];
+}
+
+-(void)viewDidAppear:(BOOL)animated {
+    
+    if(inputEmployee != nil) {
+        
+        int i = [[ContentManager shareManager] getOneDepartmentEmployee:inputEmployee];
+        
+        Department *department = [[Department alloc] init];
+        
+        department = [[ContentManager shareManager] getOneDepartmentForEmployee:i];
+        
+        int index = [[ContentManager shareManager] getIndexDepartmentInList:department];
+        
+        [txtDepartmentName setText: department.departmentName];
+        
+        [pickerView selectRow:index inComponent:0 animated:YES];
+        //vi tri bat dau trong pickerView gan cho inputDepartment 
+        inputDepartment = department;
+    }
+}
 
 - (void)viewDidLoad {
     
     [super viewDidLoad];
-    
-    [self setupView];
 }
 
 - (void)setupView {
@@ -78,22 +102,23 @@
     [txtDepartmentName setHidden:YES];
     [pickerView setHidden:YES];
     
-    if(allEmployee) {
-        
+    if(isEmployee && (editFlag || allEmployee)) {
+        // Neu them Employee
         [txtDepartmentName setHidden: NO];
         [pickerView setHidden: NO];
         
         [lblDepartment setHidden:NO];
         [lblEmploye setHidden:NO];
-        txtDepartmentName.placeholder = @"部署名";
+        txtDepartmentName.placeholder = @"NONE";
         
         [txtDepartmentName setFrame:CGRectMake(48, 223, 278, 30)];
-        [pickerView setFrame:CGRectMake(40, 246, 278, 216)];
-        [btnSave setFrame:CGRectMake(156, 453, 62, 65)];
+        [pickerView setFrame:CGRectMake(50, 246, 278, 216)];
+        [btnSave setFrame:CGRectMake(166, 453, 62, 65)];
         
         pickerView.dataSource = self;
         pickerView.delegate = self;
     }
+    [self getData];
 }
 
 - (void)getData {
@@ -114,12 +139,16 @@
         BOOL success;
         
         if (editFlag) {
-            
+          
             if (isEmployee) {
-                
+                // Sua Employee
                 inputEmployee.employeeName = [txtName text];
                 
                 success = [[ContentManager shareManager] editEmployee:inputEmployee];
+                // Sua EmployeeDepartment
+                inputDepartmentEmployee.departmentID = inputDepartment.departmentID;
+                
+                success = [[ContentManager shareManager] editDepartmentEmployee:inputDepartmentEmployee];
             } else {
                 
                 inputDepartment.departmentName = [txtName text];
@@ -129,7 +158,7 @@
         } else {
             
             if (isEmployee) {
-                //Neu la danh sach tat ca Employee
+            
                 if(allEmployee) {
                     // Nếu chọn Department
                     if ([[txtDepartmentName text] length] > 0) {
@@ -153,7 +182,7 @@
                         
                         employee = employeeList[employeeList.count - 1];
                         
-                        success = [[ContentManager shareManager] insertDepartmentEmployee:@"dep000" employeeID:employee.employeeID];
+                        success = [[ContentManager shareManager] insertDepartmentEmployee:@"Adep000" employeeID:employee.employeeID];
                     }
                 } else {
                     
