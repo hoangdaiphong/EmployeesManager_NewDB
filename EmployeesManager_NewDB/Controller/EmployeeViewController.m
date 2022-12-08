@@ -7,6 +7,7 @@
 //
 
 #import "EmployeeViewController.h"
+#import <QuartzCore/QuartzCore.h>
 
 @interface EmployeeViewController () <HomeViewDelegate, UISearchBarDelegate>
 
@@ -159,10 +160,21 @@
         
 //        Neu khong co employee thi se hien ra man hinh thong bao khong co gi
         if(employeeListInDepartment.count == 0){
-
-            [imgNoneEmployee setHidden:NO];
-            [imgNoneEmployee setAnimationDuration:2];
             
+            // Animation cho UIImageView
+            [imgNoneEmployee setHidden:NO];
+            CGPoint origin = self.imgNoneEmployee.center;
+            CGPoint target = CGPointMake(self.imgNoneEmployee.center.x, self.imgNoneEmployee.center.y+50);
+            CABasicAnimation *bounce = [CABasicAnimation animationWithKeyPath:@"position.y"];
+            bounce.duration = 0.5;
+            bounce.fromValue = [NSNumber numberWithInt:origin.y];
+            bounce.toValue = [NSNumber numberWithInt:target.y];
+            bounce.repeatCount = 2;
+            bounce.autoreverses = YES;
+            [self.imgNoneEmployee.layer addAnimation:bounce forKey:@"position"];
+            CGAffineTransform transform = CGAffineTransformMakeScale(1.3, 1.3);
+            imgNoneEmployee.transform = transform;
+
             [tblEmployee setHidden: YES];
             
         } else {

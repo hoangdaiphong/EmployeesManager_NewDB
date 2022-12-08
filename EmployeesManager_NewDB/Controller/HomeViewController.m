@@ -20,7 +20,7 @@
 //    NSArray<NSString *> *dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentationDirectory, NSUserDomainMask, YES);
 //    NSLog(@"%@", dirPaths);
     
-    // Them vao database Department none
+    // Them vao database Department NONE
     NSMutableArray *listDepartment = [[NSMutableArray alloc] init];
     
     [listDepartment addObjectsFromArray:[[ContentManager shareManager] getAllDepartment]];
