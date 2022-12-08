@@ -20,6 +20,7 @@
 @synthesize allEmployeeTitle;
 @synthesize searchBar;
 @synthesize isFiltered;
+@synthesize imgNoneEmployee;
 
 - (void)viewDidLoad {
     
@@ -65,6 +66,10 @@
     [tblEmployee registerNib:[UINib nibWithNibName:NSStringFromClass([TableViewCell class]) bundle:nil] forCellReuseIdentifier:@"Cell"];
     tblEmployee.dataSource = self;
     tblEmployee.delegate = self;
+    
+    //set Image neu khong co Employee
+    [imgNoneEmployee setImage:[UIImage imageNamed:@"noData.png"]];
+    [imgNoneEmployee setHidden:YES];
     
     [self getData];
 }
@@ -153,22 +158,18 @@
     } else {
         
 //        Neu khong co employee thi se hien ra man hinh thong bao khong co gi
-        UIImageView *myImage = [[UIImageView alloc] initWithFrame:CGRectMake(-20, 122, 405, 506)];
-        myImage.image = [UIImage imageNamed:@"noData.png"];
-        [containView addSubview:myImage];
-
         if(employeeListInDepartment.count == 0){
 
+            [imgNoneEmployee setHidden:NO];
+            [imgNoneEmployee setAnimationDuration:2];
+            
             [tblEmployee setHidden: YES];
-
-            [myImage setHidden:NO];
+            
         } else {
-
-            [myImage setHidden:YES];
-
+            [imgNoneEmployee setHidden:YES];
+            
             [tblEmployee setHidden: NO];
         }
-        
         return [employeeListInDepartment count];
     }
 }

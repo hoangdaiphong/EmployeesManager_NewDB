@@ -12,6 +12,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="EmployeeViewController">
             <connections>
                 <outlet property="containView" destination="Wkz-m3-gCq" id="DeL-OM-NFZ"/>
+                <outlet property="imgNoneEmployee" destination="rIC-qC-YLV" id="mZu-RP-EQh"/>
                 <outlet property="searchBar" destination="oyr-k8-jPW" id="ZYZ-XI-O1c"/>
                 <outlet property="tblEmployee" destination="qR7-Wh-WAV" id="lQB-yg-oLQ"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -37,6 +38,10 @@
                             <color key="barTintColor" red="1" green="0.87237908714192181" blue="0.83152306637779949" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <textInputTraits key="textInputTraits"/>
                         </searchBar>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="rIC-qC-YLV">
+                            <rect key="frame" x="29" y="205" width="316" height="291"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        </imageView>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
