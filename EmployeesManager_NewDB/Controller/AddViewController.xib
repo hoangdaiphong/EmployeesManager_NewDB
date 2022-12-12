@@ -16,6 +16,7 @@
                 <outlet property="lblDepartment" destination="WXy-Oj-cLT" id="lD5-xZ-rDD"/>
                 <outlet property="lblEmploye" destination="iYB-Ne-TaX" id="JZX-Ay-T9F"/>
                 <outlet property="pickerView" destination="8kT-WP-DGD" id="8ii-6t-kIb"/>
+                <outlet property="tblNONE" destination="9KJ-PI-k45" id="dxk-Pl-Epz"/>
                 <outlet property="txtDepartmentName" destination="gRl-SG-BJ7" id="gTb-la-wdq"/>
                 <outlet property="txtName" destination="5Pz-mV-tgn" id="gTs-w5-2ZB"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -63,6 +64,11 @@
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
+                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="9KJ-PI-k45">
+                            <rect key="frame" x="48" y="300" width="278" height="359"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </tableView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Employee" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="iYB-Ne-TaX">
                             <rect key="frame" x="48" y="131" width="77" height="21"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>

@@ -47,6 +47,7 @@
     homeView.delegate = self;
     [containView addSubview:homeView];
     
+    
     [tblDepartment setFrame:CGRectMake(0, header.bounds.size.height, SCREEN_WIDTH, SCREEN_HEIGHT - header.bounds.size.height - homeView.bounds.size.height)];
     
     [tblDepartment registerNib:[UINib nibWithNibName:NSStringFromClass([TableViewCell class]) bundle:nil] forCellReuseIdentifier:@"Cell"];
@@ -90,15 +91,15 @@
 
 #pragma mark - TableView's Delegate
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    
-    return  [departmentList count];
+    // Mat hien thi NONE -> -1
+    return  departmentList.count - 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     TableViewCell *cell = [self.tblDepartment dequeueReusableCellWithIdentifier:@"Cell"];
-    
-    [cell setCellWithDepartment:[departmentList objectAtIndex:indexPath.row] atIndex:indexPath];
+    // Mat hien thi NONE -> +1
+    [cell setCellWithDepartment:[departmentList objectAtIndex:indexPath.row + 1] atIndex:indexPath];
     
     cell.delegate = self;
     
@@ -106,12 +107,12 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+ 
     [self.tblDepartment deselectRowAtIndexPath:indexPath animated:YES];
     
     EmployeeViewController *employeeView = [[EmployeeViewController alloc] init];
-    
-    employeeView.inputDepartment = [departmentList objectAtIndex:indexPath.row];
+    // Mat hien thi NONE
+    employeeView.inputDepartment = [departmentList objectAtIndex:indexPath.row + 1];
     
     [self.navigationController pushViewController:employeeView animated:YES];
 }
@@ -151,8 +152,8 @@
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"削除の確認" message:@"本当に削除してもいいですか？" preferredStyle:UIAlertControllerStyleAlert];
     
     UIAlertAction *actionDelete = [UIAlertAction actionWithTitle:@"はい" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        
-        self->inputDepartment = [self->departmentList objectAtIndex:index.row];
+        // Mat hien thi NONE
+        self->inputDepartment = [self->departmentList objectAtIndex:index.row + 1];
         // Xoa employeesList
         [self getEmployeeListInDepartment];
         
@@ -174,9 +175,9 @@
             }
         }
         // Xoa Department
-        if ([[ContentManager shareManager] deleteDepartment:[self->departmentList objectAtIndex:index.row]]) {
-            
-            [self->departmentList removeObjectAtIndex:index.row];
+        if ([[ContentManager shareManager] deleteDepartment:[self->departmentList objectAtIndex:index.row + 1]]) {
+            // Mat hien thi NONE
+            [self->departmentList removeObjectAtIndex:index.row + 1];
             
             [self->tblDepartment beginUpdates];
             
@@ -199,13 +200,13 @@
 - (void)tableViewCellEditAtIndex:(NSIndexPath *)index {
     
     AddViewController *addView = [[AddViewController alloc] init];
-    
+
     addView.delegate = self;
-    
+
     addView.editFlag = YES;
-    
-    addView.inputDepartment = [departmentList objectAtIndex:index.row];
-    
+    // Mat hien thi NONE
+    addView.inputDepartment = [departmentList objectAtIndex:index.row + 1];
+
     [self.navigationController pushViewController:addView animated:YES];
 }
 

@@ -79,6 +79,8 @@
     
     [self getAllEmployee];
     
+    [self getAllDepartment];
+    
     [self getEmployeeListInDepartment];
     
     [tblEmployee reloadData];
@@ -91,6 +93,14 @@
     
     [employeeList addObjectsFromArray:[[ContentManager shareManager] getAllEmployee]];
 }
+
+- (void)getAllDepartment {
+    
+    departmentList = [[NSMutableArray alloc] init];
+    
+    [departmentList addObjectsFromArray:[[ContentManager shareManager] getAllDepartment]];
+}
+
 // Lay danh sach EmployeeDepartment co DepartmentID trung nhau
 - (void)getEmployeeDepartment {
     
@@ -155,7 +165,6 @@
             
              return [employeeList count];
         }
-       
     } else {
         
 //        Neu khong co employee thi se hien ra man hinh thong bao khong co gi
@@ -191,13 +200,21 @@
     TableViewCell *cell = [self.tblEmployee dequeueReusableCellWithIdentifier:@"Cell"];
     
     if(allEmployee) {
+        // Neu la man hinh AllEmployee thi se hien Label Department
+        [cell setHiddenDepartment:NO];
         
         if(isFiltered) {
             
             [cell setCellWithEmployee:[filteredEmployees objectAtIndex:indexPath.row] atIndex:indexPath];
+            // Do ten Department vao LblDepartment
+            [cell setCellWithDepartmentForAllEmployee:[filteredEmployees objectAtIndex:indexPath.row]];
+            
         } else {
             
             [cell setCellWithEmployee:[employeeList objectAtIndex:indexPath.row] atIndex:indexPath];
+            // Do ten Department vao LblDepartment
+            [cell setCellWithDepartmentForAllEmployee:[employeeList objectAtIndex:indexPath.row]];
+            
         }
     } else {
       
@@ -222,6 +239,16 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     [self.tblEmployee deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+// Neu la man hinh allEmployee thi kich thuoc cell tang len
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if (allEmployee) {
+        
+        return 80;
+    }
+    return 50;
 }
 
 #pragma mark - TableViewCell's Delegate

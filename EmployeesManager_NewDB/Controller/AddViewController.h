@@ -21,10 +21,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-@interface AddViewController : UIViewController <HeaderViewDelegate, UIPickerViewDataSource, UIPickerViewDelegate> {
+@interface AddViewController : UIViewController <HeaderViewDelegate, UIPickerViewDataSource, UIPickerViewDelegate, UITableViewDataSource, UITableViewDelegate> {
 
     NSMutableArray *departmentList;
     NSMutableArray *employeeList;
+    NSMutableArray *employeeListOfNONE;
 }
 
 @property (nonatomic, weak) IBOutlet UIView *containView;
@@ -36,6 +37,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, weak) IBOutlet UIPickerView *pickerView;
 @property (nonatomic, weak) IBOutlet UIButton *btnSave;
+
+//---------
+@property (weak, nonatomic) IBOutlet UITableView *tblNONE;
+
 
 @property (nonatomic, assign) BOOL editFlag;
 @property (nonatomic, assign) BOOL isEmployee;

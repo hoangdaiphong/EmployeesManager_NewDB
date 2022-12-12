@@ -463,10 +463,9 @@
         if (departmentEmployee.departmentID == departmentID) {
             
             [list2 addObject:departmentEmployee];
-            
         }
     }
-    
+
     return list2;
 }
 

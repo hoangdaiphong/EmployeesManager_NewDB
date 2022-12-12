@@ -26,10 +26,13 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 @property (nonatomic, weak) IBOutlet UILabel *lblName;
+@property (weak, nonatomic) IBOutlet UILabel *lblDeparment;
 
 @property (nonatomic, weak) id<TableViewCellDelegate>delegate;
 
+- (void)setHiddenDepartment:(BOOL)isHidden;
 - (void)setCellWithDepartment:(Department *)department atIndex:(NSIndexPath *)index;
+- (void)setCellWithDepartmentForAllEmployee:(Employee *)employee;
 - (void)setCellWithEmployee:(Employee *)employee atIndex:(nonnull NSIndexPath *)index;
 
 @end
