@@ -27,6 +27,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, weak) IBOutlet UILabel *lblName;
 @property (weak, nonatomic) IBOutlet UILabel *lblDeparment;
+//-----
+@property (nonatomic, weak) IBOutlet UIButton *btnEdit;
+@property (nonatomic, weak) IBOutlet UIButton *btnDelete;
 
 @property (nonatomic, weak) id<TableViewCellDelegate>delegate;
 
@@ -34,6 +37,9 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)setCellWithDepartment:(Department *)department atIndex:(NSIndexPath *)index;
 - (void)setCellWithDepartmentForAllEmployee:(Employee *)employee;
 - (void)setCellWithEmployee:(Employee *)employee atIndex:(nonnull NSIndexPath *)index;
+
+//-(void)setCell:(BOOL)hideBack hideAdd:(BOOL)hideAdd inController:(UIViewController *)controller;
+-(void)setHiddenButtonInCell:(BOOL)hideEdit deleteButton:(BOOL)hideDelete;
 
 @end
 

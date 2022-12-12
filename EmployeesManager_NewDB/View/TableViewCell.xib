@@ -49,10 +49,17 @@
                         <color key="textColor" red="0.85427461139896377" green="0.32722524653399215" blue="0.25230953564503728" alpha="0.84705882352941175" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q01-vR-b1e">
+                        <rect key="frame" x="283" y="7" width="46" height="30"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <state key="normal" title="Button"/>
+                    </button>
                 </subviews>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
             <connections>
+                <outlet property="btnDelete" destination="ehP-JX-eP2" id="u8L-eb-VsN"/>
+                <outlet property="btnEdit" destination="ED0-td-E2q" id="2UZ-mK-RaU"/>
                 <outlet property="lblDeparment" destination="bvo-Aj-WvW" id="ZWg-yI-M1v"/>
                 <outlet property="lblName" destination="tDz-SU-DFB" id="pew-4W-O7K"/>
             </connections>

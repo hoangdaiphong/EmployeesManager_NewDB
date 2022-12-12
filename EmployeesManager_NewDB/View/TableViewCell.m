@@ -13,6 +13,8 @@
 @synthesize lblName;
 @synthesize lblDeparment;
 @synthesize delegate;
+@synthesize btnEdit;
+@synthesize btnDelete;
 
 - (void)awakeFromNib {
     [super awakeFromNib];
@@ -25,6 +27,16 @@
 
     // Configure the view for the selected state
 }
+
+// Neu la man hinh danh sach NONE Department cua Employee
+-(void)setHiddenButtonInCell:(BOOL)hideEdit deleteButton:(BOOL)hideDelete {
+    
+    [btnDelete setHidden: hideEdit];
+    
+    [btnEdit setHidden:hideDelete];
+    
+}
+
 // Neu la man hinh AllEmployee thi se xuat hien lblDepartment
 - (void)setHiddenDepartment:(BOOL)isHidden {
     

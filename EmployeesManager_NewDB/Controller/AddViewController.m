@@ -58,8 +58,7 @@
 
 - (void)viewDidLoad {
     
-    [super viewDidLoad];
-    
+    [super viewDidLoad];    
 }
 
 - (void)setupView {
@@ -167,7 +166,7 @@
     
     [departmentEmployee addObjectsFromArray:[[ContentManager shareManager] getDepartmentEmployee:department.departmentID]];
     
-    NSMutableArray *employeeListOfNONE = [[NSMutableArray alloc] init];
+    employeeListOfNONE = [[NSMutableArray alloc] init];
     
     [employeeListOfNONE addObjectsFromArray:[[ContentManager shareManager] getEmployeeInDepartment:departmentEmployee]];
 }
@@ -291,45 +290,40 @@
 #pragma mark - TableView's Delegate
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    //--------
-    Department *department = [[Department alloc] init];
-    
-    department = departmentList[0];
-    
-    NSMutableArray *departmentEmployee = [[NSMutableArray alloc] init];
-    
-    [departmentEmployee addObjectsFromArray:[[ContentManager shareManager] getDepartmentEmployee:department.departmentID]];
-    NSMutableArray *employeeListOfNONE = [[NSMutableArray alloc] init];
-    
-    [employeeListOfNONE addObjectsFromArray:[[ContentManager shareManager] getEmployeeInDepartment:departmentEmployee]];
-    
     
     return employeeListOfNONE.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    //---------
-//    Department *department = [[Department alloc] init];
-//
-//    department = departmentList[0];
-//
-//    NSMutableArray *departmentEmployee = [[NSMutableArray alloc] init];
-//
-//    [departmentEmployee addObjectsFromArray:[[ContentManager shareManager] getDepartmentEmployee:department.departmentID]];
-//    NSMutableArray *employeeListOfNONE = [[NSMutableArray alloc] init];
-//
-//    [employeeListOfNONE addObjectsFromArray:[[ContentManager shareManager] getEmployeeInDepartment:departmentEmployee]];
-    //------------
-    TableViewCell *cell = [self.tblNONE dequeueReusableCellWithIdentifier:@"Cell"];
- 
-    [cell setCellWithDepartment:[employeeListOfNONE objectAtIndex:indexPath.row] atIndex:indexPath];
     
+    TableViewCell *cell = [self.tblNONE dequeueReusableCellWithIdentifier:@"Cell"];
+    
+    [cell setCellWithEmployee:[employeeListOfNONE objectAtIndex:indexPath.row] atIndex:indexPath];
+    
+    [cell setHiddenButtonInCell:YES deleteButton:YES];
 //    cell.delegate = self;
     
     return cell;
 }
+
+
 //
 //- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 //
 //}
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if (indexPath.row % 2 == 0)
+        
+        cell.backgroundColor = [UIColor whiteColor];
+    else
+        
+        cell.backgroundColor = [UIColor colorWithRed:178/255.f green:14/255.f blue:12/255.f alpha:0.05];
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    [self.tblNONE deselectRowAtIndexPath:indexPath animated:YES];
+}
 @end

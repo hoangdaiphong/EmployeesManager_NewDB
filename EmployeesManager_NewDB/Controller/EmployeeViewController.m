@@ -228,7 +228,7 @@
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    if ( indexPath.row % 2 == 0 )
+    if (indexPath.row % 2 == 0)
         
         cell.backgroundColor = [UIColor whiteColor];
     else
