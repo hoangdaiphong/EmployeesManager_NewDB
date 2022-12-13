@@ -67,6 +67,7 @@
     [tblEmployee registerNib:[UINib nibWithNibName:NSStringFromClass([TableViewCell class]) bundle:nil] forCellReuseIdentifier:@"Cell"];
     tblEmployee.dataSource = self;
     tblEmployee.delegate = self;
+    tblEmployee.separatorColor = [UIColor clearColor];
     
     //set Image neu khong co Employee
     [imgNoneEmployee setImage:[UIImage imageNamed:@"noData.png"]];

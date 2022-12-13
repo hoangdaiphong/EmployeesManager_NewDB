@@ -9,7 +9,7 @@
 #import "AddViewController.h"
 #import "EmployeeViewController.h"
 
-@interface AddViewController ()
+@interface AddViewController () <TableViewCellDelegate>
 
 @end
 
@@ -30,6 +30,8 @@
 @synthesize lblDepartment;
 @synthesize inputDepartmentEmployee;
 @synthesize tblNONE;
+@synthesize isCheck;
+
 
 -(void)viewWillAppear:(BOOL)animated {
 
@@ -58,7 +60,7 @@
 
 - (void)viewDidLoad {
     
-    [super viewDidLoad];    
+    [super viewDidLoad];
 }
 
 - (void)setupView {
@@ -134,6 +136,7 @@
     [tblNONE registerNib:[UINib nibWithNibName:NSStringFromClass([TableViewCell class]) bundle:nil] forCellReuseIdentifier:@"Cell"];
     tblNONE.dataSource = self;
     tblNONE.delegate = self;
+    tblNONE.separatorColor = [UIColor clearColor];
     
     [self getData];
 }
@@ -143,6 +146,8 @@
     [self getAllDepartment];
     
     [self getEmployeeOfNONE];
+    
+    [self getBoolArrayforEmployeeNONE];
 }
 
 - (void)getAllDepartment {
@@ -170,9 +175,69 @@
     
     [employeeListOfNONE addObjectsFromArray:[[ContentManager shareManager] getEmployeeInDepartment:departmentEmployee]];
 }
+   //--------
+- (void)getBoolArrayforEmployeeNONE {
+    
+    boolArrayforEmployeeNONE = [[NSMutableArray alloc] init];
+    
+    for (int i = 0; i < employeeListOfNONE.count; i++) {
+        
+        [boolArrayforEmployeeNONE addObject:[NSNumber numberWithBool:NO]];
+    }
+}
 
 - (IBAction)addAction:(id)sender {
     
+    // Kiem tra xem da check hay chua, check roi thi update va chuyen man hinh
+    for (int i = 0; i < boolArrayforEmployeeNONE.count; i++) {
+        
+        NSNumber *checked = [NSNumber numberWithBool:YES];
+        
+        if (boolArrayforEmployeeNONE[i] == checked) {
+            
+            isCheck = YES;
+            break;
+        }
+    }
+   
+    if (isCheck) {
+        
+        BOOL success = false;
+        
+        employeeListAddFromNONE = [[NSMutableArray alloc] init];
+        departmentEmployeeListAddFromNONE = [[NSMutableArray alloc] init];
+        
+        for (int i = 0; i < boolArrayforEmployeeNONE.count; i++) {
+            
+            NSNumber *checked = [NSNumber numberWithBool:YES];
+            
+            if (boolArrayforEmployeeNONE[i] == checked) {
+                
+                [employeeListAddFromNONE addObject: employeeListOfNONE[i]];
+            }
+        }
+        
+        [departmentEmployeeListAddFromNONE addObjectsFromArray:[[ContentManager shareManager] getDepartmentEmployeeForSearch:employeeListAddFromNONE]];
+        
+        DepartmentEmployee *departmentEmployee = [[DepartmentEmployee alloc] init];
+        
+        for (int i = 0; i < departmentEmployeeListAddFromNONE.count; i++) {
+            
+            departmentEmployee = departmentEmployeeListAddFromNONE[i];
+            
+            departmentEmployee.departmentID = inputDepartment.departmentID;
+            
+            success = [[ContentManager shareManager] editDepartmentEmployee:departmentEmployee];
+        }
+        
+        if (delegate != nil && [delegate respondsToSelector:@selector(addViewControllerFinishWithSuccess:)]) {
+            
+            [delegate addViewControllerFinishWithSuccess:success];
+        }
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+
+    // Neu khong phai la man hinh update NONE sang Department khac
     if ([[txtName text] length] > 0) {
         
         BOOL success = false;
@@ -224,7 +289,7 @@
                         success = [[ContentManager shareManager] insertDepartmentEmployee:@"Adep000" employeeID:employee.employeeID];
                     }
                 } else {
-                    
+                  
 //                    // Neu la danh sach Employee trong department
 //                    success = [[ContentManager shareManager] insertEmployeeWithName:txtName.text];
 //                    // Them DepartmentEmployee
@@ -300,17 +365,28 @@
     
     [cell setCellWithEmployee:[employeeListOfNONE objectAtIndex:indexPath.row] atIndex:indexPath];
     
-    [cell setHiddenButtonInCell:YES deleteButton:YES];
-//    cell.delegate = self;
+    [cell setHiddenButtonInCell:YES deleteButton:YES checkButton:NO];
+    
+    cell.delegate = self;
     
     return cell;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 
-//
-//- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-//
-//}
+    [self.tblNONE deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+// Ham lay chuoi array da duoc check
+- (void)tableViewCellCheckAtIndex:(NSIndexPath *)index isCheck:(BOOL)isCheck {
+
+    Employee *employee = [[Employee alloc] init];
+    
+    employee = [employeeListOfNONE objectAtIndex:index.row];
+
+    [boolArrayforEmployeeNONE replaceObjectAtIndex:index.row withObject:[NSNumber numberWithBool:isCheck]];
+
+}
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     
@@ -322,8 +398,4 @@
         cell.backgroundColor = [UIColor colorWithRed:178/255.f green:14/255.f blue:12/255.f alpha:0.05];
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    [self.tblNONE deselectRowAtIndexPath:indexPath animated:YES];
-}
 @end

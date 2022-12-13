@@ -26,6 +26,9 @@ NS_ASSUME_NONNULL_BEGIN
     NSMutableArray *departmentList;
     NSMutableArray *employeeList;
     NSMutableArray *employeeListOfNONE;
+    NSMutableArray *employeeListAddFromNONE;
+    NSMutableArray *boolArrayforEmployeeNONE;
+    NSMutableArray *departmentEmployeeListAddFromNONE;
 }
 
 @property (nonatomic, weak) IBOutlet UIView *containView;
@@ -41,10 +44,11 @@ NS_ASSUME_NONNULL_BEGIN
 //---------
 @property (weak, nonatomic) IBOutlet UITableView *tblNONE;
 
-
 @property (nonatomic, assign) BOOL editFlag;
 @property (nonatomic, assign) BOOL isEmployee;
 @property (nonatomic, assign) BOOL allEmployee;
+//---------
+@property (nonatomic, assign) BOOL isCheck;
 
 @property (nonatomic, weak) Department *inputDepartment;
 @property (nonatomic, weak) Employee *inputEmployee;

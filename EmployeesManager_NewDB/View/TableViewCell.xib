@@ -49,15 +49,19 @@
                         <color key="textColor" red="0.85427461139896377" green="0.32722524653399215" blue="0.25230953564503728" alpha="0.84705882352941175" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q01-vR-b1e">
-                        <rect key="frame" x="283" y="7" width="46" height="30"/>
+                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2s6-Aj-2no">
+                        <rect key="frame" x="223" y="7" width="30" height="30"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <state key="normal" title="Button"/>
+                        <state key="normal" image="0.png"/>
+                        <connections>
+                            <action selector="checkCell:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="dOg-wz-ffe"/>
+                        </connections>
                     </button>
                 </subviews>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
             <connections>
+                <outlet property="btnCheck" destination="2s6-Aj-2no" id="n6G-Lf-bSF"/>
                 <outlet property="btnDelete" destination="ehP-JX-eP2" id="u8L-eb-VsN"/>
                 <outlet property="btnEdit" destination="ED0-td-E2q" id="2UZ-mK-RaU"/>
                 <outlet property="lblDeparment" destination="bvo-Aj-WvW" id="ZWg-yI-M1v"/>
@@ -67,6 +71,7 @@
         </tableViewCell>
     </objects>
     <resources>
+        <image name="0.png" width="160" height="159"/>
         <image name="edit-.png" width="64" height="64"/>
         <image name="remove.png" width="96" height="96"/>
     </resources>

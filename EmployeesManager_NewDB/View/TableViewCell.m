@@ -15,10 +15,18 @@
 @synthesize delegate;
 @synthesize btnEdit;
 @synthesize btnDelete;
+@synthesize btnCheck;
+@synthesize isCheck;
 
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
+    // Set nut check
+//    UIImageView* imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
+//    [imageView setImage:[UIImage imageNamed:@"0.jpg"]];
+//    [self.btnCheck addSubview: imageView];
+    [btnCheck setHidden:YES];
+    
     [lblDeparment setHidden:YES];
 }
 
@@ -29,12 +37,13 @@
 }
 
 // Neu la man hinh danh sach NONE Department cua Employee
--(void)setHiddenButtonInCell:(BOOL)hideEdit deleteButton:(BOOL)hideDelete {
+-(void)setHiddenButtonInCell:(BOOL)hideEdit deleteButton:(BOOL)hideDelete checkButton:(BOOL)checkButton {
     
     [btnDelete setHidden: hideEdit];
     
     [btnEdit setHidden:hideDelete];
     
+    [btnCheck setHidden:checkButton];
 }
 
 // Neu la man hinh AllEmployee thi se xuat hien lblDepartment
@@ -83,4 +92,46 @@
         [delegate tableViewCellEditAtIndex:currentCell];
     }
 }
+
+- (IBAction)checkCell:(id)sender {
+    
+    UIImageView* animatedImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
+    if (!isCheck) {
+        
+        animatedImageView.animationImages = [NSArray arrayWithObjects:
+                                             [UIImage imageNamed:@"1.png"],
+                                             [UIImage imageNamed:@"2.png"],
+                                             [UIImage imageNamed:@"3.png"],
+                                             [UIImage imageNamed:@"4.png"],
+                                             [UIImage imageNamed:@"5.png"],
+                                             [UIImage imageNamed:@"6.png"],nil];
+        animatedImageView.animationDuration = 0.25f;
+        animatedImageView.animationRepeatCount = 1;
+        [animatedImageView startAnimating];
+        [animatedImageView setImage:[UIImage imageNamed:@"6.png"]];
+        isCheck = YES;
+    } else {
+        
+        animatedImageView.animationImages = [NSArray arrayWithObjects:
+                                             [UIImage imageNamed:@"5.png"],
+                                             [UIImage imageNamed:@"4.png"],
+                                             [UIImage imageNamed:@"3.png"],
+                                             [UIImage imageNamed:@"2.png"],
+                                             [UIImage imageNamed:@"1.png"],
+                                             [UIImage imageNamed:@"0.png"],nil];
+        animatedImageView.animationDuration = 0.25f;
+        animatedImageView.animationRepeatCount = 1;
+        [animatedImageView startAnimating];
+        [animatedImageView setImage:[UIImage imageNamed:@"0.png"]];
+        isCheck = NO;
+    }
+    
+    if (delegate != nil && [delegate respondsToSelector:@selector(tableViewCellCheckAtIndex: isCheck:)]) {
+        
+        [delegate tableViewCellCheckAtIndex:currentCell isCheck:isCheck];
+    }
+    
+    [self.btnCheck addSubview: animatedImageView];
+}
+
 @end

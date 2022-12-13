@@ -54,6 +54,7 @@
     
     tblDepartment.dataSource = self;
     tblDepartment.delegate = self;
+    tblDepartment.separatorColor = [UIColor clearColor];
     
     [self getData];
 }
@@ -108,6 +109,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
  
+    // Xoa hieu ung khi nhan vao
     [self.tblDepartment deselectRowAtIndexPath:indexPath animated:YES];
     
     EmployeeViewController *employeeView = [[EmployeeViewController alloc] init];

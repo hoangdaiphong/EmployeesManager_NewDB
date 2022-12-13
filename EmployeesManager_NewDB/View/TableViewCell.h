@@ -10,6 +10,7 @@
 
 #import "Department+CoreDataClass.h"
 #import "Employee+CoreDataClass.h"
+#import "AddViewController.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -18,6 +19,8 @@ NS_ASSUME_NONNULL_BEGIN
 @optional
 - (void)tableViewCellDeleteAtIndex:(NSIndexPath *)index;
 - (void)tableViewCellEditAtIndex:(NSIndexPath *)index;
+//Check employee trong list NONE
+- (void)tableViewCellCheckAtIndex:(NSIndexPath *)index isCheck:(BOOL)isCheck;
 @end
 
 @interface TableViewCell : UITableViewCell {
@@ -27,9 +30,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, weak) IBOutlet UILabel *lblName;
 @property (weak, nonatomic) IBOutlet UILabel *lblDeparment;
-//-----
+//Hien thi cac button hay khong
 @property (nonatomic, weak) IBOutlet UIButton *btnEdit;
 @property (nonatomic, weak) IBOutlet UIButton *btnDelete;
+@property (nonatomic, weak) IBOutlet UIButton *btnCheck;
+
+//Them bien check YES NO hien thi button check
+@property (nonatomic, assign) BOOL isCheck;
 
 @property (nonatomic, weak) id<TableViewCellDelegate>delegate;
 
@@ -38,8 +45,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)setCellWithDepartmentForAllEmployee:(Employee *)employee;
 - (void)setCellWithEmployee:(Employee *)employee atIndex:(nonnull NSIndexPath *)index;
 
-//-(void)setCell:(BOOL)hideBack hideAdd:(BOOL)hideAdd inController:(UIViewController *)controller;
--(void)setHiddenButtonInCell:(BOOL)hideEdit deleteButton:(BOOL)hideDelete;
+//--------
+-(void)setHiddenButtonInCell:(BOOL)hideEdit deleteButton:(BOOL)hideDelete checkButton:(BOOL)checkButton;
 
 @end
 
