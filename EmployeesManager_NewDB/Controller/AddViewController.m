@@ -69,12 +69,13 @@
     containView.backgroundColor = [UIColor colorWithRed:178/255.f green:14/255.f blue:12/255.f alpha:0.05];
     
     HeaderView *header = [[HeaderView alloc] init];
-    //--------
+    
     [lblDepartment setHidden:YES];
     [lblEmploye setHidden:YES];
     [txtDepartmentName setHidden:YES];
     [pickerView setHidden:YES];
 
+    // Cau hinh tblNONE
     tblNONE.layer.borderWidth = 2.0;
     tblNONE.layer.borderColor = [UIColor colorWithRed:18/255.f green:14/255.f blue:152/255.f alpha:0.1].CGColor;
     tblNONE.layer.cornerRadius = 20;
@@ -83,7 +84,7 @@
     tblNONE.dataSource = self;
     tblNONE.delegate = self;
     tblNONE.separatorColor = [UIColor clearColor];
-    //-------
+    
     if (editFlag) {
         
         if (isEmployee) {
@@ -96,10 +97,10 @@
             [header setHeaderWithTitle:@"部署を編集" hideBack:NO hideAdd:YES inController:self];
             
             [txtName setText:[inputDepartment departmentName]];
-            //--------
+           
             [tblNONE setHidden:YES];
             [txtName setHidden:NO];
-            //--------
+           
         }
     } else {
         
@@ -120,11 +121,6 @@
     }
     header.delegate = self;
     [containView addSubview:header];
-    
-//    [lblDepartment setHidden:YES];
-//    [lblEmploye setHidden:YES];
-//    [txtDepartmentName setHidden:YES];
-//    [pickerView setHidden:YES];
     
     if(isEmployee && (editFlag || allEmployee)) {
         // Neu them Employee
@@ -147,14 +143,6 @@
         pickerView.dataSource = self;
         pickerView.delegate = self;
     }
-    // Cau hinh tblNONE
-//    tblNONE.layer.borderWidth = 2.0;
-//    tblNONE.layer.borderColor = [UIColor colorWithRed:18/255.f green:14/255.f blue:152/255.f alpha:0.1].CGColor;
-//    tblNONE.layer.cornerRadius = 20;
-//    [tblNONE registerNib:[UINib nibWithNibName:NSStringFromClass([TableViewCell class]) bundle:nil] forCellReuseIdentifier:@"Cell"];
-//    tblNONE.dataSource = self;
-//    tblNONE.delegate = self;
-//    tblNONE.separatorColor = [UIColor clearColor];
     
     [self getData];
 }
@@ -193,7 +181,7 @@
     
     [employeeListOfNONE addObjectsFromArray:[[ContentManager shareManager] getEmployeeInDepartment:departmentEmployee]];
 }
-   //--------
+
 - (void)getBoolArrayforEmployeeNONE {
     
     boolArrayforEmployeeNONE = [[NSMutableArray alloc] init];
@@ -459,35 +447,4 @@
 
         [self.btnSave addSubview: animatedImageView];
 }
-
-
-
-//- (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view
-//{
-//    UILabel* pickerLabel = (UILabel*)view;
-//
-//    if (!pickerLabel)
-//    {
-//        pickerLabel = [[UILabel alloc] init];
-//
-//        pickerLabel.font = [UIFont fontWithName:@"SourceSansPro-Semibold" size:20];
-//
-//        pickerLabel.textAlignment=NSTextAlignmentCenter;
-//    }
-//
-//    NSMutableArray *departmentNameList = [[NSMutableArray alloc] init];
-//    for (int i = 0; i < departmentList.count; i++) {
-//
-//        Department *department = [[Department alloc] init];
-//
-//        department = departmentList[i];
-//
-//        [departmentNameList addObject:department.departmentName];
-//    }
-//
-//    [pickerLabel setText:[departmentNameList objectAtIndex:row]];
-//
-//    return pickerLabel;
-//}
-
 @end

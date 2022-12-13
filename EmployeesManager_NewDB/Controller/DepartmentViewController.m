@@ -156,6 +156,7 @@
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"削除の確認" message:@"本当に削除してもいいですか？" preferredStyle:UIAlertControllerStyleAlert];
     
     UIAlertAction *actionDelete = [UIAlertAction actionWithTitle:@"はい" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
         // Mat hien thi NONE
         self->inputDepartment = [self->departmentList objectAtIndex:index.row + 1];
         // Xoa employeesList

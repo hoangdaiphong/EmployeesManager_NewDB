@@ -41,13 +41,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, weak) IBOutlet UIPickerView *pickerView;
 @property (nonatomic, weak) IBOutlet UIButton *btnSave;
 
-//---------
 @property (weak, nonatomic) IBOutlet UITableView *tblNONE;
 
 @property (nonatomic, assign) BOOL editFlag;
 @property (nonatomic, assign) BOOL isEmployee;
 @property (nonatomic, assign) BOOL allEmployee;
-//---------
 @property (nonatomic, assign) BOOL isCheck;
 
 @property (nonatomic, weak) Department *inputDepartment;
