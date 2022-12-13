@@ -79,18 +79,44 @@
 
 - (IBAction)deleteCell:(id)sender {
     
-    if (delegate != nil && [delegate respondsToSelector:@selector(tableViewCellDeleteAtIndex:)]) {
+    // Hieu ung khi an nut delete
+    [self deleteButtonAnimation];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [NSThread sleepForTimeInterval:0.3f];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            if (self->delegate != nil && [self->delegate respondsToSelector:@selector(tableViewCellDeleteAtIndex:)]) {
         
-        [delegate tableViewCellDeleteAtIndex:currentCell];
-    }
+                [self->delegate tableViewCellDeleteAtIndex:self->currentCell];
+            }
+        });
+    });
+    
+//    if (delegate != nil && [delegate respondsToSelector:@selector(tableViewCellDeleteAtIndex:)]) {
+//
+//        [delegate tableViewCellDeleteAtIndex:currentCell];
+//    }
 }
 
 - (IBAction)editCell:(id)sender {
-    
-    if (delegate != nil && [delegate respondsToSelector:@selector(tableViewCellEditAtIndex:)]) {
+
+    // Hieu ung khi an nut edit
+    [self editButtonAnimation];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [NSThread sleepForTimeInterval:0.3f];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            if (self->delegate != nil && [self->delegate respondsToSelector:@selector(tableViewCellEditAtIndex:)]) {
         
-        [delegate tableViewCellEditAtIndex:currentCell];
-    }
+                [self->delegate tableViewCellEditAtIndex:self->currentCell];
+            }
+        });
+    });
+    
+//    if (delegate != nil && [delegate respondsToSelector:@selector(tableViewCellEditAtIndex:)]) {
+//
+//        [delegate tableViewCellEditAtIndex:currentCell];
+//    }
 }
 
 - (IBAction)checkCell:(id)sender {
@@ -134,4 +160,35 @@
     [self.btnCheck addSubview: animatedImageView];
 }
 
+- (void) editButtonAnimation {
+
+    CGPoint origin = self.btnEdit.center;
+    CGPoint target = CGPointMake(self.btnEdit.center.x, self.btnEdit.center.y + 5);
+    CABasicAnimation *bounce = [CABasicAnimation animationWithKeyPath:@"position.y"];
+    bounce.duration = 0.3;
+    bounce.fromValue = [NSNumber numberWithInt:origin.y];
+    bounce.toValue = [NSNumber numberWithInt:target.y];
+    bounce.repeatCount = 1;
+    bounce.autoreverses = YES;
+    [self.btnEdit.layer addAnimation:bounce forKey:@"position"];
+    CGAffineTransform transform = CGAffineTransformMakeScale(1.1, 1.1);
+    transform = CGAffineTransformMakeScale(1, 1);
+    btnEdit.transform = transform;
+}
+
+- (void) deleteButtonAnimation {
+    
+    CGPoint origin = self.btnDelete.center;
+    CGPoint target = CGPointMake(self.btnDelete.center.x, self.btnDelete.center.y + 5);
+    CABasicAnimation *bounce = [CABasicAnimation animationWithKeyPath:@"position.y"];
+    bounce.duration = 0.3;
+    bounce.fromValue = [NSNumber numberWithInt:origin.y];
+    bounce.toValue = [NSNumber numberWithInt:target.y];
+    bounce.repeatCount = 1;
+    bounce.autoreverses = YES;
+    [self.btnDelete.layer addAnimation:bounce forKey:@"position"];
+    CGAffineTransform transform = CGAffineTransformMakeScale(1.1, 1.1);
+    transform = CGAffineTransformMakeScale(1, 1);
+    btnDelete.transform = transform;
+}
 @end

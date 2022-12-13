@@ -40,6 +40,7 @@
     searchBar.delegate = self;
     [searchBar setFrame:CGRectMake(0, header.bounds.size.height, searchBar.bounds.size.width, searchBar.bounds.size.height)];
     [searchBar setHidden:YES];
+    
     if (allEmployee) {
         
         [searchBar setHidden:NO];
@@ -48,6 +49,7 @@
         
         [header setHeaderWithTitle:inputDepartment.departmentName hideBack:NO hideAdd:NO inController:self];
     }
+    
     header.delegate = self;
     [self.view addSubview:header];
     
@@ -173,18 +175,7 @@
         if(employeeListInDepartment.count == 0){
             
             // Animation cho UIImageView
-            [imgNoneEmployee setHidden:NO];
-            CGPoint origin = self.imgNoneEmployee.center;
-            CGPoint target = CGPointMake(self.imgNoneEmployee.center.x, self.imgNoneEmployee.center.y+50);
-            CABasicAnimation *bounce = [CABasicAnimation animationWithKeyPath:@"position.y"];
-            bounce.duration = 0.5;
-            bounce.fromValue = [NSNumber numberWithInt:origin.y];
-            bounce.toValue = [NSNumber numberWithInt:target.y];
-            bounce.repeatCount = 2;
-            bounce.autoreverses = YES;
-            [self.imgNoneEmployee.layer addAnimation:bounce forKey:@"position"];
-            CGAffineTransform transform = CGAffineTransformMakeScale(1.3, 1.3);
-            imgNoneEmployee.transform = transform;
+            [self noDataImageAnimation];
 
             [tblEmployee setHidden: YES];
             
@@ -232,7 +223,7 @@
     
     if (indexPath.row % 2 == 0)
         
-        cell.backgroundColor = [UIColor colorWithRed:18/255.f green:14/255.f blue:152/255.f alpha:0.1];
+        cell.backgroundColor = [UIColor colorWithRed:18/255.f green:14/255.f blue:152/255.f alpha:0.05];
     else
         
         cell.backgroundColor = [UIColor colorWithRed:178/255.f green:14/255.f blue:12/255.f alpha:0.05];
@@ -478,5 +469,22 @@
     departmentEmployeeForSearch = [[NSMutableArray alloc] init];
 
     [departmentEmployeeForSearch addObjectsFromArray:[[ContentManager shareManager] getDepartmentEmployeeForSearch:filteredEmployees]];
+}
+
+// Hieu ung cho image khong co du lieu
+- (void) noDataImageAnimation {
+    
+    [imgNoneEmployee setHidden:NO];
+    CGPoint origin = self.imgNoneEmployee.center;
+    CGPoint target = CGPointMake(self.imgNoneEmployee.center.x, self.imgNoneEmployee.center.y + 50);
+    CABasicAnimation *bounce = [CABasicAnimation animationWithKeyPath:@"position.y"];
+    bounce.duration = 0.5;
+    bounce.fromValue = [NSNumber numberWithInt:origin.y];
+    bounce.toValue = [NSNumber numberWithInt:target.y];
+    bounce.repeatCount = 2;
+    bounce.autoreverses = YES;
+    [self.imgNoneEmployee.layer addAnimation:bounce forKey:@"position"];
+    CGAffineTransform transform = CGAffineTransformMakeScale(1.3, 1.3);
+    imgNoneEmployee.transform = transform;
 }
 @end

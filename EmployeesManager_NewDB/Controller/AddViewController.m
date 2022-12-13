@@ -429,7 +429,7 @@
     
     if (indexPath.row % 2 == 0)
         
-        cell.backgroundColor = [UIColor colorWithRed:18/255.f green:14/255.f blue:152/255.f alpha:0.1];
+        cell.backgroundColor = [UIColor colorWithRed:18/255.f green:14/255.f blue:152/255.f alpha:0.05];
     else
         
         cell.backgroundColor = [UIColor colorWithRed:178/255.f green:14/255.f blue:12/255.f alpha:0.05];
