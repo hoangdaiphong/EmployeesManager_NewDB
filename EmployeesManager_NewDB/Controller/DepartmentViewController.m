@@ -50,6 +50,8 @@
     
     [tblDepartment setFrame:CGRectMake(0, header.bounds.size.height, SCREEN_WIDTH, SCREEN_HEIGHT - header.bounds.size.height - homeView.bounds.size.height)];
     
+    tblDepartment.backgroundColor = [UIColor colorWithRed:18/255.f green:14/255.f blue:152/255.f alpha:0.1];
+    
     [tblDepartment registerNib:[UINib nibWithNibName:NSStringFromClass([TableViewCell class]) bundle:nil] forCellReuseIdentifier:@"Cell"];
     
     tblDepartment.dataSource = self;
@@ -126,7 +128,7 @@
         cell.backgroundColor = [UIColor colorWithRed:178/255.f green:14/255.f blue:12/255.f alpha:0.05];
     else
         
-        cell.backgroundColor = [UIColor whiteColor];
+        cell.backgroundColor = [UIColor colorWithRed:18/255.f green:14/255.f blue:152/255.f alpha:0.1];
 }
 
 #pragma mark - HeaderView's Delegate

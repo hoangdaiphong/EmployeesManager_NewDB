@@ -65,6 +65,7 @@
     }
     
     [tblEmployee registerNib:[UINib nibWithNibName:NSStringFromClass([TableViewCell class]) bundle:nil] forCellReuseIdentifier:@"Cell"];
+    tblEmployee.backgroundColor = [UIColor colorWithRed:18/255.f green:14/255.f blue:152/255.f alpha:0.1];
     tblEmployee.dataSource = self;
     tblEmployee.delegate = self;
     tblEmployee.separatorColor = [UIColor clearColor];
@@ -231,7 +232,7 @@
     
     if (indexPath.row % 2 == 0)
         
-        cell.backgroundColor = [UIColor whiteColor];
+        cell.backgroundColor = [UIColor colorWithRed:18/255.f green:14/255.f blue:152/255.f alpha:0.1];
     else
         
         cell.backgroundColor = [UIColor colorWithRed:178/255.f green:14/255.f blue:12/255.f alpha:0.05];

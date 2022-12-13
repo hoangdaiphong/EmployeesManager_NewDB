@@ -105,7 +105,7 @@
                                              [UIImage imageNamed:@"4.png"],
                                              [UIImage imageNamed:@"5.png"],
                                              [UIImage imageNamed:@"6.png"],nil];
-        animatedImageView.animationDuration = 0.25f;
+        animatedImageView.animationDuration = 0.2f;
         animatedImageView.animationRepeatCount = 1;
         [animatedImageView startAnimating];
         [animatedImageView setImage:[UIImage imageNamed:@"6.png"]];
@@ -119,7 +119,7 @@
                                              [UIImage imageNamed:@"2.png"],
                                              [UIImage imageNamed:@"1.png"],
                                              [UIImage imageNamed:@"0.png"],nil];
-        animatedImageView.animationDuration = 0.25f;
+        animatedImageView.animationDuration = 0.2f;
         animatedImageView.animationRepeatCount = 1;
         [animatedImageView startAnimating];
         [animatedImageView setImage:[UIImage imageNamed:@"0.png"]];
