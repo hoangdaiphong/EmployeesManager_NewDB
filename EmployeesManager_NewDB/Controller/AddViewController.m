@@ -373,6 +373,10 @@
     
     department = departmentList[row];
     
+    // An duong vien 2 ben
+    [[pickerView.subviews objectAtIndex:1] setHidden:TRUE];
+    [[pickerView.subviews objectAtIndex:2] setHidden:TRUE];
+    
     return department.departmentName;
 }
 
@@ -455,5 +459,35 @@
 
         [self.btnSave addSubview: animatedImageView];
 }
+
+
+
+//- (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view
+//{
+//    UILabel* pickerLabel = (UILabel*)view;
+//
+//    if (!pickerLabel)
+//    {
+//        pickerLabel = [[UILabel alloc] init];
+//
+//        pickerLabel.font = [UIFont fontWithName:@"SourceSansPro-Semibold" size:20];
+//
+//        pickerLabel.textAlignment=NSTextAlignmentCenter;
+//    }
+//
+//    NSMutableArray *departmentNameList = [[NSMutableArray alloc] init];
+//    for (int i = 0; i < departmentList.count; i++) {
+//
+//        Department *department = [[Department alloc] init];
+//
+//        department = departmentList[i];
+//
+//        [departmentNameList addObject:department.departmentName];
+//    }
+//
+//    [pickerLabel setText:[departmentNameList objectAtIndex:row]];
+//
+//    return pickerLabel;
+//}
 
 @end
