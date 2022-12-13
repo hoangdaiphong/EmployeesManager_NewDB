@@ -39,9 +39,9 @@
                             <textInputTraits key="textInputTraits"/>
                         </textField>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="GnR-3U-X8F">
-                            <rect key="frame" x="156" y="213" width="62" height="65"/>
+                            <rect key="frame" x="160" y="220" width="50" height="50"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <state key="normal" title="Add" image="apply.png"/>
+                            <state key="normal" title="Add" image="a0.png"/>
                             <connections>
                                 <action selector="addAction:" destination="-1" eventType="touchUpInside" id="5mf-cN-dh1"/>
                             </connections>
@@ -85,6 +85,6 @@
         </view>
     </objects>
     <resources>
-        <image name="apply.png" width="96" height="96"/>
+        <image name="a0.png" width="159" height="160"/>
     </resources>
 </document>

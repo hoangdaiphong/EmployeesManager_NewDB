@@ -69,7 +69,20 @@
     containView.backgroundColor = [UIColor colorWithRed:178/255.f green:14/255.f blue:12/255.f alpha:0.05];
     
     HeaderView *header = [[HeaderView alloc] init];
+    //--------
+        [lblDepartment setHidden:YES];
+        [lblEmploye setHidden:YES];
+        [txtDepartmentName setHidden:YES];
+        [pickerView setHidden:YES];
     
+        tblNONE.layer.borderWidth = 2.0;
+        tblNONE.layer.borderColor = [UIColor colorWithRed:18/255.f green:14/255.f blue:152/255.f alpha:0.1].CGColor;
+        tblNONE.layer.cornerRadius = 20;
+        [tblNONE registerNib:[UINib nibWithNibName:NSStringFromClass([TableViewCell class]) bundle:nil] forCellReuseIdentifier:@"Cell"];
+        tblNONE.dataSource = self;
+        tblNONE.delegate = self;
+        tblNONE.separatorColor = [UIColor clearColor];
+    //-------
     if (editFlag) {
         
         if (isEmployee) {
@@ -82,6 +95,10 @@
             [header setHeaderWithTitle:@"部署を編集" hideBack:NO hideAdd:YES inController:self];
             
             [txtName setText:[inputDepartment departmentName]];
+            //--------
+            [tblNONE setHidden:YES];
+            [txtName setHidden:NO];
+            //--------
         }
     } else {
         
@@ -103,10 +120,10 @@
     header.delegate = self;
     [containView addSubview:header];
     
-    [lblDepartment setHidden:YES];
-    [lblEmploye setHidden:YES];
-    [txtDepartmentName setHidden:YES];
-    [pickerView setHidden:YES];
+//    [lblDepartment setHidden:YES];
+//    [lblEmploye setHidden:YES];
+//    [txtDepartmentName setHidden:YES];
+//    [pickerView setHidden:YES];
     
     if(isEmployee && (editFlag || allEmployee)) {
         // Neu them Employee
@@ -119,7 +136,7 @@
         
         [txtDepartmentName setFrame:CGRectMake(48, 223, 278, 30)];
         [pickerView setFrame:CGRectMake(50, 246, 278, 216)];
-        [btnSave setFrame:CGRectMake(166, 453, 62, 65)];
+        [btnSave setFrame:CGRectMake(170, 463, 50, 50)];
         
         // Hien txtName va an tblNONE
         [txtName setHidden:NO];
@@ -130,13 +147,13 @@
         pickerView.delegate = self;
     }
     // Cau hinh tblNONE
-    tblNONE.layer.borderWidth = 2.0;
-    tblNONE.layer.borderColor = [UIColor colorWithRed:18/255.f green:14/255.f blue:152/255.f alpha:0.1].CGColor;
-    tblNONE.layer.cornerRadius = 20;
-    [tblNONE registerNib:[UINib nibWithNibName:NSStringFromClass([TableViewCell class]) bundle:nil] forCellReuseIdentifier:@"Cell"];
-    tblNONE.dataSource = self;
-    tblNONE.delegate = self;
-    tblNONE.separatorColor = [UIColor clearColor];
+//    tblNONE.layer.borderWidth = 2.0;
+//    tblNONE.layer.borderColor = [UIColor colorWithRed:18/255.f green:14/255.f blue:152/255.f alpha:0.1].CGColor;
+//    tblNONE.layer.cornerRadius = 20;
+//    [tblNONE registerNib:[UINib nibWithNibName:NSStringFromClass([TableViewCell class]) bundle:nil] forCellReuseIdentifier:@"Cell"];
+//    tblNONE.dataSource = self;
+//    tblNONE.delegate = self;
+//    tblNONE.separatorColor = [UIColor clearColor];
     
     [self getData];
 }
@@ -234,7 +251,17 @@
             
             [delegate addViewControllerFinishWithSuccess:success];
         }
-        [self.navigationController popViewControllerAnimated:YES];
+        
+        // Hieu ung
+        [self addAnimation];
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            
+            [NSThread sleepForTimeInterval:0.3f];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                [self.navigationController popViewControllerAnimated:YES];
+            });
+        });
     }
 
     // Neu khong phai la man hinh update NONE sang Department khac
@@ -312,7 +339,16 @@
             
             [delegate addViewControllerFinishWithSuccess:success];
         }
-        [self.navigationController popViewControllerAnimated:YES];
+       
+        // Hieu ung
+        [self addAnimation];
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            [NSThread sleepForTimeInterval:0.3f];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                [self.navigationController popViewControllerAnimated:YES];
+            });
+        }); 
     }
 }
 
@@ -396,6 +432,27 @@
     else
         
         cell.backgroundColor = [UIColor colorWithRed:178/255.f green:14/255.f blue:12/255.f alpha:0.05];
+}
+
+- (void)addAnimation {
+    
+    UIImageView* animatedImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
+        
+        animatedImageView.animationImages = [NSArray arrayWithObjects:
+                                             [UIImage imageNamed:@"a1.png"],
+                                             [UIImage imageNamed:@"a2.png"],
+                                             [UIImage imageNamed:@"a3.png"],
+                                             [UIImage imageNamed:@"a4.png"],
+                                             [UIImage imageNamed:@"a5.png"],
+                                             [UIImage imageNamed:@"a5.png"],
+                                             [UIImage imageNamed:@"a7.png"],nil];
+        
+        animatedImageView.animationDuration = 0.1f;
+        animatedImageView.animationRepeatCount = 1;
+        [animatedImageView startAnimating];
+        [animatedImageView setImage:[UIImage imageNamed:@"a7.png"]];
+
+        [self.btnSave addSubview: animatedImageView];
 }
 
 @end
