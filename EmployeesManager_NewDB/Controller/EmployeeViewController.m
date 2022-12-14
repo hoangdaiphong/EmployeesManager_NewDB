@@ -476,7 +476,7 @@
     
     [imgNoneEmployee setHidden:NO];
     CGPoint origin = self.imgNoneEmployee.center;
-    CGPoint target = CGPointMake(self.imgNoneEmployee.center.x, self.imgNoneEmployee.center.y + 50);
+    CGPoint target = CGPointMake(self.imgNoneEmployee.center.x, self.imgNoneEmployee.center.y + 30);
     CABasicAnimation *bounce = [CABasicAnimation animationWithKeyPath:@"position.y"];
     bounce.duration = 0.5;
     bounce.fromValue = [NSNumber numberWithInt:origin.y];
